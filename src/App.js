@@ -16,6 +16,7 @@ function App() {
     console.log(webcamRef);
     //  Loop and detect hands
     setInterval(() => {
+      // console.log('Looking for a hand to detect');
       detect(net);
     }, 100);
   };
@@ -52,7 +53,7 @@ function App() {
       // Make Detections
 
       const hand = await net.estimateHands(video);
-      console.log('hand detection:  ', hand);
+      // console.log('hand detection:  ', hand);
 
       // Draw mesh
       const ctx = canvasRef.current.getContext('2d');
