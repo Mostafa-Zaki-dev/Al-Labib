@@ -8,6 +8,27 @@ import './App.css';
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const runHandpose = async () => {
+    const net = await handpose.load();
+    console.log('Handpose model loaded.');
+    //  Loop and detect hands
+    setInterval(() => {
+      detect(net);
+    }, 100);
+  };
+
+  runHandpose();
+
+  const detect = async (net) => {
+    // Check data is available
+    // Get Video Properties
+    // Set video width
+    // Set canvas height and width
+    // Make Detections
+    // Draw mesh
+  };
+
   return (
     <div className="App">
       <header className="App-header">
