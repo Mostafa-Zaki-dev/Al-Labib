@@ -4,6 +4,7 @@ import * as tf from '@tensorflow/tfjs';
 import * as handpose from '@tensorflow-models/handpose';
 import Webcam from 'react-webcam';
 import './App.css';
+import { drawHand } from './utilities';
 
 function App() {
   const webcamRef = useRef(null);
@@ -23,7 +24,9 @@ function App() {
 
   const detect = async (net) => {
     // Check data is available
+
     /* video.readyState === 4 indicates HAVE_ENOUGH_DATA */
+
     if (
       typeof webcamRef.current !== 'undefined' &&
       webcamRef.current !== null &&
@@ -52,6 +55,8 @@ function App() {
       console.log('hand detection:  ', hand);
 
       // Draw mesh
+      const ctx = canvasRef.current.getContext('2d');
+      drawHand(hand, ctx);
     }
   };
   return (
