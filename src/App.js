@@ -1,10 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 // import logo from './logo.svg';
 import * as tf from '@tensorflow/tfjs';
 import * as handpose from '@tensorflow-models/handpose';
 import Webcam from 'react-webcam';
 import './App.css';
 import { drawHand } from './utilities';
+import * as fp from 'fingerpose';
 
 function App() {
   const webcamRef = useRef(null);
@@ -13,7 +14,6 @@ function App() {
   const runHandpose = async () => {
     const net = await handpose.load();
     console.log('Handpose model loaded.');
-    console.log(webcamRef);
     //  Loop and detect hands
     setInterval(() => {
       // console.log('Looking for a hand to detect');
@@ -54,6 +54,17 @@ function App() {
 
       const hand = await net.estimateHands(video);
       // console.log('hand detection:  ', hand);
+
+      // setting up Gesture Estimator
+
+      if (hand.length > 0) {
+        const GE = new fp.GestureEstimator([
+          fp.Gestures.VictoryGesture,
+          fp.Gestures.ThumbsUpGesture,
+        ]);
+        const gesture = await GE.estimate(hand[0].landmarks, 7);
+        console.log('gesture', gesture);
+      }
 
       // Draw mesh
       const ctx = canvasRef.current.getContext('2d');
