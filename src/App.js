@@ -6,6 +6,7 @@ import Webcam from 'react-webcam';
 import './App.css';
 import { drawHand } from './utilities';
 import * as fp from 'fingerpose';
+import handSigns from './handsigns';
 
 function App() {
   const webcamRef = useRef(null);
@@ -18,7 +19,7 @@ function App() {
     setInterval(() => {
       // console.log('Looking for a hand to detect');
       detect(net);
-    }, 100);
+    }, 150);
   };
 
   runHandpose();
@@ -58,11 +59,9 @@ function App() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
-        const GE = new fp.GestureEstimator([
-          fp.Gestures.VictoryGesture,
-          fp.Gestures.ThumbsUpGesture,
-        ]);
-        const gesture = await GE.estimate(hand[0].landmarks, 7);
+        const { alefSign, behSign } = handSigns;
+        const GE = new fp.GestureEstimator([alefSign, behSign]);
+        const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         console.log('gesture', gesture);
       }
 
