@@ -14,8 +14,8 @@ poseData
 //Thumb (No curl, Vertical up (best) or diagonal up left / right)
 alefSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 alefSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-alefSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.7);
-alefSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.7);
+alefSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.4);
+alefSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.4);
 
 //All other fingers (full Curl, Horizontal left/right)
 

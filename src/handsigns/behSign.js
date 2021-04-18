@@ -34,22 +34,22 @@ poseData righ hand side
 
 //Thumb (Half curl (best) or no curl, Vertical up (best) or diagonal up left/right
 behSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
-behSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 0.7);
+behSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 0.2);
 behSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.7);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.7);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.25);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.25);
 
 //Index (No curl, Vertical up (best) or diagonal up left /righ )
 behSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 behSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.7);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.7);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.25);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.25);
 
 //All other fingers (full Curl, Vertical up (best) or diagonal up left/right)
 
 for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {
   behSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   behSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
-  behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.7);
-  behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.7);
+  behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.25);
+  behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.25);
 }

@@ -7,6 +7,7 @@ import './App.css';
 import { drawHand } from './utilities';
 import * as fp from 'fingerpose';
 import handSigns from './handsigns';
+import { tehSign } from './handsigns/tehSign';
 
 function App() {
   const webcamRef = useRef(null);
@@ -60,7 +61,7 @@ function App() {
 
       if (hand.length > 0) {
         const { alefSign, behSign } = handSigns;
-        const GE = new fp.GestureEstimator([alefSign, behSign]);
+        const GE = new fp.GestureEstimator([alefSign, behSign, tehSign]);
         const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         console.log('gesture', gesture);
       }
