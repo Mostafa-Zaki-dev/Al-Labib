@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 // import logo from './logo.svg';
 import * as tf from '@tensorflow/tfjs';
 import * as handpose from '@tensorflow-models/handpose';
@@ -7,11 +7,15 @@ import './App.css';
 import { drawHand } from './utilities';
 import * as fp from 'fingerpose';
 import handSigns from './handsigns';
-import { tehSign } from './handsigns/tehSign';
+import lettersPNG from './lettersPNG';
 
 function App() {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+
+  const [letter, setLetter] = useState(null);
+
+  console.log('letter >>>', letter);
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -20,10 +24,8 @@ function App() {
     setInterval(() => {
       // console.log('Looking for a hand to detect');
       detect(net);
-    }, 150);
+    }, 100);
   };
-
-  runHandpose();
 
   const detect = async (net) => {
     // Check data is available
@@ -63,7 +65,17 @@ function App() {
         const { alefSign, behSign, tehSign, thehSign } = handSigns;
         const GE = new fp.GestureEstimator([alefSign, behSign, tehSign, thehSign]);
         const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        console.log('gesture', gesture);
+        // console.log('gesture >>>', gesture);
+
+        if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
+          // console.log('gesture.gestures >>>>', gesture.gestures);
+
+          const confidenceArr = gesture.gestures.map((prediction) => prediction.confidence);
+          const maxConfidenceIdx = confidenceArr.indexOf(Math.max(...confidenceArr));
+          // console.log('maxConfidenceIdx >>>', maxConfidenceIdx);
+          // console.log('name of maxConfidence  >>',  gesture.gestures[maxConfidenceIdx].name);
+          setLetter(gesture.gestures[maxConfidenceIdx].name);
+        }
       }
 
       // Draw mesh
@@ -71,6 +83,12 @@ function App() {
       drawHand(hand, ctx);
     }
   };
+
+  //run runHandpose on mount
+  useEffect(() => {
+    runHandpose();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -103,6 +121,24 @@ function App() {
             height: 480,
           }}
         />
+        {letter !== null ? (
+          <img
+            src={lettersPNG[letter]}
+            alt="letter pic"
+            style={{
+              position: 'absolute',
+              marginLeft: 'auto',
+              marginRight: 'auto',
+              left: 400,
+              bottom: 500,
+              right: 0,
+              textAlign: 'center',
+              height: 100,
+            }}
+          />
+        ) : (
+          ''
+        )}
       </header>
     </div>
   );

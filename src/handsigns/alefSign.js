@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const alefSign = new GestureDescription('Alef-Letter');
+export const alefSign = new GestureDescription('Alef_Letter');
 
 /* 
 poseData
