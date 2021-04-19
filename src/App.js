@@ -60,8 +60,8 @@ function App() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
-        const { alefSign, behSign } = handSigns;
-        const GE = new fp.GestureEstimator([alefSign, behSign, tehSign]);
+        const { alefSign, behSign, tehSign, thehSign } = handSigns;
+        const GE = new fp.GestureEstimator([alefSign, behSign, tehSign, thehSign]);
         const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         console.log('gesture', gesture);
       }
