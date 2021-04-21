@@ -5,6 +5,8 @@ import Theh_Letter from './Theh.png';
 import Jeem_Letter from './Jeem.png';
 import Haa_Letter from './Haa.png';
 import Khaa_Letter from './Khaa.png';
+import Dal_Letter from './Dal.png';
+import Zal_Letter from './Zal.png';
 
 const lettersPNG = {
   Alef_Letter,
@@ -14,6 +16,8 @@ const lettersPNG = {
   Jeem_Letter,
   Haa_Letter,
   Khaa_Letter,
+  Dal_Letter,
+  Zal_Letter,
 };
 
 export default lettersPNG;

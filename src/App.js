@@ -62,7 +62,17 @@ function App() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
-        const { alefSign, behSign, tehSign, thehSign, jeemSign, haaSign, khaaSign } = handSigns;
+        const {
+          alefSign,
+          behSign,
+          tehSign,
+          thehSign,
+          jeemSign,
+          haaSign,
+          khaaSign,
+          dalSign,
+          zalSign,
+        } = handSigns;
         const GE = new fp.GestureEstimator([
           alefSign,
           behSign,
@@ -71,9 +81,11 @@ function App() {
           jeemSign,
           haaSign,
           khaaSign,
+          dalSign,
+          zalSign,
         ]);
-        const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        // console.log('gesture >>>', gesture);
+        const gesture = await GE.estimate(hand[0].landmarks, 7.5); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           // console.log('gesture.gestures >>>>', gesture.gestures);
