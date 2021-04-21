@@ -24,7 +24,7 @@ function App() {
     setInterval(() => {
       // console.log('Looking for a hand to detect');
       detect(net);
-    }, 100);
+    }, 10);
   };
 
   const detect = async (net) => {
@@ -62,10 +62,18 @@ function App() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
-        const { alefSign, behSign, tehSign, thehSign } = handSigns;
-        const GE = new fp.GestureEstimator([alefSign, behSign, tehSign, thehSign]);
-        const gesture = await GE.estimate(hand[0].landmarks, 7); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        // console.log('gesture >>>', gesture);
+        const { alefSign, behSign, tehSign, thehSign, jeemSign, haaSign, khaaSign } = handSigns;
+        const GE = new fp.GestureEstimator([
+          alefSign,
+          behSign,
+          tehSign,
+          thehSign,
+          jeemSign,
+          haaSign,
+          khaaSign,
+        ]);
+        const gesture = await GE.estimate(hand[0].landmarks, 8); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           // console.log('gesture.gestures >>>>', gesture.gestures);
