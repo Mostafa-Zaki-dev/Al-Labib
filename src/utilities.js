@@ -32,7 +32,7 @@ export const drawHand = (predictions, ctx) => {
           ctx.moveTo(landmarks[firstJointIndex][0], landmarks[firstJointIndex][1]);
           ctx.lineTo(landmarks[secondJointIndex][0], landmarks[secondJointIndex][1]);
           ctx.strokeStyle = 'plum';
-          ctx.lineWidth = 4;
+          ctx.lineWidth = 1;
           ctx.stroke();
         }
       }
@@ -45,7 +45,7 @@ export const drawHand = (predictions, ctx) => {
         const y = landmarks[i][1];
         // Start drawing
         ctx.beginPath();
-        ctx.arc(x, y, 6, 0, 3 * Math.PI); /* arc(x,y,radius,start andgle, end angle) */
+        ctx.arc(x, y, 2, 0, 3 * Math.PI); /* arc(x,y,radius,start andgle, end angle) */
 
         // Set line color
         ctx.fillStyle = 'orange';

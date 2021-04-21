@@ -18,9 +18,10 @@ poseData left hand face
 4: (3) ["Pinky", "Half Curl", "Diagonal Up Left"]
 */
 
-//Thumb (Half curl, Vertical up)
+//Thumb (Half curl, Horizontal Left/Right)
 jeemSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
-jeemSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
+jeemSign.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
+jeemSign.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 1.0);
 
 //All other fingers (Half curl, diagonal up left/right)
 for (let finger of [Finger.Index, Finger.Middle, Finger.Ring, Finger.Pinky]) {
