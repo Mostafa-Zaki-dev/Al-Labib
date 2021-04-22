@@ -38,6 +38,13 @@ for (let finger of [Finger.Index, Finger.Middle]) {
   zalSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);
 }
 
+//Ring & Pinky (Full curl, Vertical up)
+for (let finger of [Finger.Ring, Finger.Pinky]) {
+  zalSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
+  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
+  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
+}
+
 /*
 seperating Index and Middle for testing
 
@@ -51,10 +58,3 @@ zalSign.addCurl(Finger.Middle, FingerCurl.HalfCurl, 1.0);
 zalSign.addDirection(Finger.Middle, FingerDirection.DiagonalUpLeft, 1.0);
 zalSign.addDirection(Finger.Middle, FingerDirection.DiagonalUpRight, 1.0);
  */
-
-//Ring & Pinky (Full curl, Vertical up)
-for (let finger of [Finger.Ring, Finger.Pinky]) {
-  zalSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
-  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
-  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
-}

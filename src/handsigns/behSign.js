@@ -33,16 +33,22 @@ poseData righ hand side
 */
 
 //Thumb (Half curl, Diagonal up left/right (best) or Vertical up)
-behSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
+/* behSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
 behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
 behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
-behSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4);
+behSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4); */
+
+//Switching confidence
+behSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
+behSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
+behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.4);
+behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.4);
 
 //Index (No curl, Vertical up (best) or diagonal up left /righ )
 behSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
 behSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.4);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.4);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.2);
+behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.2);
 
 //All other fingers (full Curl, Vertical up (best) or diagonal up left/right)
 

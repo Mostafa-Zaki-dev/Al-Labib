@@ -7,6 +7,8 @@ import { haaSign } from './haaSign';
 import { khaaSign } from './khaaSign';
 import { dalSign } from './dalSign';
 import { zalSign } from './zalSign';
+import { raaSign } from './raaSign';
+import { zeenSign } from './zeenSign';
 
 const handSigns = {
   alefSign,
@@ -18,6 +20,8 @@ const handSigns = {
   khaaSign,
   dalSign,
   zalSign,
+  raaSign,
+  zeenSign,
 };
 
 export default handSigns;
