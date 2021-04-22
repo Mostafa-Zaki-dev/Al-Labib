@@ -19,11 +19,11 @@ poseData left hand face
 
 */
 
-//Thumb (Half curl, diagonal up left/right (best) or Vertical up)
+//Thumb (Half curl, Diagonal up left/right (best) or Vertical up)
 tehSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
-tehSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4);
 tehSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
 tehSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
+tehSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4);
 
 //Index (No curl, Vertical up (best) or diagonal up left /righ )
 tehSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);

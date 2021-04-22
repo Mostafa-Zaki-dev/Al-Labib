@@ -32,11 +32,11 @@ poseData righ hand side
 4: (3) ["Pinky", "Full Curl", "Diagonal Up Right"]
 */
 
-//Thumb (Half curl, Vertical up (best) or diagonal up left/right
+//Thumb (Half curl, Diagonal up left/right (best) or Vertical up)
 behSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
-behSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4);
 behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
 behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
+behSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.4);
 
 //Index (No curl, Vertical up (best) or diagonal up left /righ )
 behSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);

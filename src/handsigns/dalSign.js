@@ -29,10 +29,11 @@ dalSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 dalSign.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
 dalSign.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 1.0);
 
-//Index (Half Curl, Diagonal up/left)
-dalSign.addCurl(Finger.Index, FingerCurl.HalfCurl, 1.0);
-dalSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 1.0);
-dalSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 1.0);
+//Index (No Curl, Horizontal right/left)
+dalSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
+dalSign.addCurl(Finger.Index, FingerCurl.HalfCurl, 0.2);
+dalSign.addDirection(Finger.Index, FingerDirection.HorizontalLeft, 1.0);
+dalSign.addDirection(Finger.Index, FingerDirection.HorizontalRight, 1.0);
 
 //All other fingers (Full curl, Diagonal up/left)
 for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {

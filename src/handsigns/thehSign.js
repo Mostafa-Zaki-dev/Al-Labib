@@ -44,7 +44,7 @@ thehSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 1.0);
 thehSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
 thehSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
 
-//Index (No curl, Vertical up (best) or diagonal up left /righ )
+//Index (No curl, Vertical up (best) or diagonal up left /right )
 thehSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
 thehSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
 thehSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.4);
