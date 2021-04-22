@@ -63,37 +63,42 @@ function App() {
 
       if (hand.length > 0) {
         //destructuring signs
-        const {
-          alefSign,
-          behSign,
-          tehSign,
-          thehSign,
-          jeemSign,
-          haaSign,
-          khaaSign,
-          dalSign,
-          zalSign,
-          raaSign,
-          zeenSign,
-          seenSign,
-          sheenSign,
-        } = handSigns;
+        // const {
+        //   alefSign,
+        //   behSign,
+        //   tehSign,
+        //   thehSign,
+        //   jeemSign,
+        //   haaSign,
+        //   khaaSign,
+        //   dalSign,
+        //   zalSign,
+        //   raaSign,
+        //   zeenSign,
+        //   seenSign,
+        //   sheenSign,
+        // } = handSigns;
 
-        const GE = new fp.GestureEstimator([
-          alefSign,
-          behSign,
-          tehSign,
-          thehSign,
-          jeemSign,
-          haaSign,
-          khaaSign,
-          dalSign,
-          zalSign,
-          raaSign,
-          zeenSign,
-          seenSign,
-          sheenSign,
-        ]);
+        // const GE = new fp.GestureEstimator([
+        //   alefSign,
+        //   behSign,
+        //   tehSign,
+        //   thehSign,
+        //   jeemSign,
+        //   haaSign,
+        //   khaaSign,
+        //   dalSign,
+        //   zalSign,
+        //   raaSign,
+        //   zeenSign,
+        //   seenSign,
+        //   sheenSign,
+        // ]);
+
+        // Applying DRY and KISS principles
+        const GE = new fp.GestureEstimator(
+          Object.keys(handSigns).map((handSign) => handSigns[handSign])
+        );
         const gesture = await GE.estimate(hand[0].landmarks, 7.5); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         console.log('gesture >>>', gesture);
 

@@ -2,23 +2,6 @@ import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerp
 
 export const seenSign = new GestureDescription('Seen_Letter');
 
-/*
-saad handpose 
-poseData Left hand  
-0: (3) ["Thumb", "No Curl", "Vertical Up"]
-1: (3) ["Index", "Full Curl", "Diagonal Up Left"]
-2: (3) ["Middle", "Full Curl", "Vertical Up"]
-3: (3) ["Ring", "Full Curl", "Vertical Up"]
-4: (3) ["Pinky", "Full Curl", "Diagonal Up Right"]
-
-poseData Right hand
-0: (3) ["Thumb", "No Curl", "Vertical Up"]
-1: (3) ["Index", "Full Curl", "Diagonal Up Right"]
-2: (3) ["Middle", "Full Curl", "Vertical Up"]
-3: (3) ["Ring", "Full Curl", "Vertical Up"]
-4: (3) ["Pinky", "Full Curl", "Diagonal Up Left"]
-*/
-
 /* 
 0: (3) ["Thumb", "No Curl", "Vertical Up"]
 1: (3) ["Index", "No Curl", "Vertical Up"]
