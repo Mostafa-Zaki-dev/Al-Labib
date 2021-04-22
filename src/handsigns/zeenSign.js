@@ -33,7 +33,7 @@ zeenSign.addDirection(Finger.Middle, FingerDirection.DiagonalUpRight, 1.0);
 zeenSign.addDirection(Finger.Middle, FingerDirection.VerticalUp, 0.25);
 
 //Ring & Pinky (full Curl, Diagonal up left/right (best) or Vertical up)
-for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {
+for (let finger of [Finger.Ring, Finger.Pinky]) {
   zeenSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   zeenSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);
   zeenSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);

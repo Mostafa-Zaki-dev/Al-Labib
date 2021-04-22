@@ -38,12 +38,12 @@ raaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
 
 //Index (Half curl, Diagonal up left/right (best) or Vertical up)
 raaSign.addCurl(Finger.Index, FingerCurl.HalfCurl, 1.0);
-raaSign.addCurl(Finger.Index, FingerCurl.NoCurl, 0.1);
+raaSign.addCurl(Finger.Index, FingerCurl.NoCurl, 0.8);
 raaSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 1.0);
 raaSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 1.0);
 raaSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 0.25);
 
-//Ring & Pinky (full Curl, Diagonal up left/right (best) or Vertical up)
+//All other fingers (full Curl, Diagonal up left/right (best) or Vertical up)
 for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {
   raaSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   raaSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);

@@ -41,8 +41,10 @@ for (let finger of [Finger.Index, Finger.Middle]) {
 //Ring & Pinky (Full curl, Vertical up)
 for (let finger of [Finger.Ring, Finger.Pinky]) {
   zalSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
-  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
-  zalSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
+  zalSign.addDirection(finger, FingerDirection.VerticalUp, 0.7);
+  zalSign.addDirection(finger, FingerDirection.VerticalUp, 0.7);
+  zalSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);
+  zalSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);
 }
 
 /*
