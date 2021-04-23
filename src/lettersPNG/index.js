@@ -13,6 +13,8 @@ import Seen_Letter from './Seen.png';
 import Sheen_Letter from './Sheen.png';
 import Saad_Letter from './Saad.png';
 import Daad_Letter from './Daad.png';
+import Tah_Letter from './Tah.png';
+import Zah_Letter from './Zah.png';
 
 const lettersPNG = {
   Alef_Letter,
@@ -30,6 +32,8 @@ const lettersPNG = {
   Sheen_Letter,
   Saad_Letter,
   Daad_Letter,
+  Tah_Letter,
+  Zah_Letter,
 };
 
 export default lettersPNG;

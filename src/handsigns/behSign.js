@@ -47,14 +47,14 @@ behSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.4);
 //Index (No curl, Vertical up (best) or diagonal up left /righ )
 behSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);
 behSign.addDirection(Finger.Index, FingerDirection.VerticalUp, 1.0);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.2);
-behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.2);
+// behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.2);
+// behSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.2);
 
 //All other fingers (full Curl, Vertical up (best) or diagonal up left/right)
 
 for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {
   behSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   behSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
-  behSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 0.25);
-  behSign.addDirection(finger, FingerDirection.DiagonalUpRight, 0.25);
+  // behSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 0.25);
+  // behSign.addDirection(finger, FingerDirection.DiagonalUpRight, 0.25);
 }
