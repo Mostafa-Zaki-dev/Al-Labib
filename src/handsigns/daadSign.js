@@ -20,18 +20,23 @@ poseData Right hand
 
 //Thumb (No Curl, Diagonal Up left/right)
 daadSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
-daadSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
-daadSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
+daadSign.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
+daadSign.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 1.0);
+daadSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.4);
+daadSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.3);
 
 //Index & Middle (Full Curl, Diagonal Up left/right)
 for (let finger of [Finger.Index, Finger.Middle]) {
   daadSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   daadSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);
   daadSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);
+  daadSign.addDirection(finger, FingerDirection.VerticalUp, 0.3);
 }
 
 //Ring & Pinky (Full Curl, Vertical Up)
 for (let finger of [Finger.Ring, Finger.Pinky]) {
   daadSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   daadSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
+  daadSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 0.3);
+  daadSign.addDirection(finger, FingerDirection.DiagonalUpRight, 0.3);
 }

@@ -20,6 +20,7 @@ poseData Right hand
 
 //Thumb (No Curl, Vertical Up)
 saadSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
+saadSign.addCurl(Finger.Thumb, FingerCurl.HalfCurl, 0.5);
 saadSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
 
 //Index & Pinky (Full Curl, Diagonal Up left/right)
@@ -27,10 +28,13 @@ for (let finger of [Finger.Index, Finger.Pinky]) {
   saadSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   saadSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);
   saadSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);
+  saadSign.addDirection(finger, FingerDirection.VerticalUp, 0.5);
 }
 
 //Middle & Ring (Full Curl, Vertical Up)
 for (let finger of [Finger.Middle, Finger.Ring]) {
   saadSign.addCurl(finger, FingerCurl.FullCurl, 1.0);
   saadSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
+  saadSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 0.5);
+  saadSign.addDirection(finger, FingerDirection.DiagonalUpRight, 0.5);
 }
