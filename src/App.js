@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 // import logo from './logo.svg';
-import * as tf from '@tensorflow/tfjs';
+import '@tensorflow/tfjs'; //loading Tensoflow.JS
 import * as handpose from '@tensorflow-models/handpose';
 import Webcam from 'react-webcam';
 import './App.css';
@@ -22,7 +22,6 @@ function App() {
     console.log('Handpose model loaded.');
     //  Loop and detect hands
     setInterval(() => {
-      // console.log('Looking for a hand to detect');
       detect(net);
     }, 10);
   };

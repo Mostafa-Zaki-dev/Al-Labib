@@ -24,11 +24,19 @@ poseData Left hand
 4: (3) ["Pinky", "Full Curl", "Diagonal Up Left"]
 */
 
+/* Original */
+//Thumb (No curl, Vertical up (best) or diagonal left/right)
+// khaaSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
+// khaaSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
+// khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.3);
+// khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.3);
+
+/* Edit for better Gheen Letter detection */
 //Thumb (No curl, Vertical up (best) or diagonal left/right)
 khaaSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
-khaaSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
-khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.3);
-khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.3);
+khaaSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 0.7);
+khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.5);
+khaaSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.5);
 
 //All other fingers (Half curl, Horizontal left/right (best) or diagonal left/right)
 for (let finger of [Finger.Index, Finger.Middle, Finger.Ring, Finger.Pinky]) {
