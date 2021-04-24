@@ -19,6 +19,8 @@ import Ain_Letter from './Ain.png';
 import Gheen_Letter from './Gheen.png';
 import Feh_Letter from './Feh.png';
 import Qaaf_Letter from './Qaaf.png';
+import Kaaf_Letter from './Kaaf.png';
+import Laam_Letter from './Laam.png';
 
 const lettersPNG = {
   Alef_Letter,
@@ -42,6 +44,8 @@ const lettersPNG = {
   Gheen_Letter,
   Feh_Letter,
   Qaaf_Letter,
+  Kaaf_Letter,
+  Laam_Letter,
 };
 
 export default lettersPNG;
