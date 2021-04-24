@@ -33,8 +33,8 @@ poseData Left hand
 //Thumb (No Curl, Vertical Up (best), Diagonal Up left/right)
 zahSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 zahSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
-zahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.2);
-zahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.2);
+zahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.3);
+zahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.3);
 
 //Index (No Curl, Vertical Up)
 zahSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);

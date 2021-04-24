@@ -34,8 +34,8 @@ poseData Right hand
 tahSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 tahSign.addDirection(Finger.Thumb, FingerDirection.HorizontalLeft, 1.0);
 tahSign.addDirection(Finger.Thumb, FingerDirection.HorizontalRight, 1.0);
-tahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.2);
-tahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.2);
+tahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.4);
+tahSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.4);
 
 //Index (No Curl, Vertical Up)
 tahSign.addCurl(Finger.Index, FingerCurl.NoCurl, 1.0);

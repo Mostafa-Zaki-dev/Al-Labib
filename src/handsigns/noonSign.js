@@ -33,13 +33,13 @@ poseData left hand
 //Thumb (No Curl, Vertical Up)
 noonSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 noonSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
-noonSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
-noonSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
+noonSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.3);
+noonSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.3);
 
 //Index (Half Curl, Diagonal Up left/right)
 noonSign.addCurl(Finger.Index, FingerCurl.HalfCurl, 1.0);
-noonSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 1.0);
-noonSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 1.0);
+noonSign.addDirection(Finger.Index, FingerDirection.DiagonalUpRight, 0.3);
+noonSign.addDirection(Finger.Index, FingerDirection.DiagonalUpLeft, 0.3);
 
 //All other fingers (Full Curl, Vertical Up (best) or Diagonal Up left/right)
 for (let finger of [Finger.Middle, Finger.Ring, Finger.Pinky]) {

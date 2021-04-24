@@ -23,6 +23,7 @@ for (let finger of [Finger.Thumb, Finger.Index, Finger.Middle]) {
   qaafSign.addCurl(finger, FingerCurl.HalfCurl, 1.0);
   qaafSign.addDirection(finger, FingerDirection.DiagonalUpLeft, 1.0);
   qaafSign.addDirection(finger, FingerDirection.DiagonalUpRight, 1.0);
+  qaafSign.addDirection(finger, FingerDirection.VerticalUp, 1.0);
 }
 
 //Ring & Pinky (Full Curl, Vertical Up)
