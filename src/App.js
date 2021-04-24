@@ -121,6 +121,7 @@ function App() {
   //run runHandpose on mount
   useEffect(() => {
     runHandpose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
