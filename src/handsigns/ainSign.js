@@ -16,7 +16,7 @@ poseData right hand
 3: (3) ["Ring", "Full Curl", "Diagonal Up Right"]
 4: (3) ["Pinky", "Full Curl", "Horizontal Right"]
 
-poseData right left
+poseData left hand
 0: (3) ["Thumb", "No Curl", "Diagonal Up Left"]
 1: (3) ["Index", "Half Curl", "Horizontal Left"]
 2: (3) ["Middle", "Half Curl", "Horizontal Left"]
