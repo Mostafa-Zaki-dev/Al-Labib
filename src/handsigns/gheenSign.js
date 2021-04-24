@@ -22,14 +22,14 @@ poseData left hand
 //Thumb (No Curl, Vertical Up)
 gheenSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);
 gheenSign.addDirection(Finger.Thumb, FingerDirection.VerticalUp, 1.0);
-gheenSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 1.0);
-gheenSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 1.0);
+gheenSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpRight, 0.8);
+gheenSign.addDirection(Finger.Thumb, FingerDirection.DiagonalUpLeft, 0.8);
 
 //Index & Middle (Half Curl, Horizontal left/right)
 for (let finger of [Finger.Index, Finger.Middle]) {
   gheenSign.addCurl(finger, FingerCurl.HalfCurl, 1.0);
-  gheenSign.addDirection(finger, FingerDirection.HorizontalLeft, 1.0);
-  gheenSign.addDirection(finger, FingerDirection.HorizontalRight, 1.0);
+  gheenSign.addDirection(finger, FingerDirection.HorizontalLeft, 0.8);
+  gheenSign.addDirection(finger, FingerDirection.HorizontalRight, 0.8);
 }
 
 //Ring & Pinky (Full Curl, Horizontal left/right)
