@@ -34,7 +34,7 @@ for (let finger of [Finger.Index, Finger.Middle]) {
 
 //Ring & Pinky (Full Curl, Horizontal left/right)
 for (let finger of [Finger.Ring, Finger.Pinky]) {
-  gheenSign.addCurl(finger, FingerCurl.HalfCurl, 0.8);
+  gheenSign.addCurl(finger, FingerCurl.HalfCurl, 1.0);
   gheenSign.addDirection(finger, FingerDirection.HorizontalLeft, 1.0);
   gheenSign.addDirection(finger, FingerDirection.HorizontalRight, 1.0);
 }
