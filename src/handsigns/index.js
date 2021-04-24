@@ -24,6 +24,8 @@ import { laamSign } from './laamSign';
 import { meemSign } from './meemSign';
 import { noonSign } from './noonSign';
 import { hehSign } from './hehSign';
+import { wowSign } from './wowSign';
+import { yehSign } from './yehSign';
 
 const handSigns = {
   alefSign,
@@ -52,6 +54,8 @@ const handSigns = {
   meemSign,
   noonSign,
   hehSign,
+  wowSign,
+  yehSign,
 };
 
 export default handSigns;

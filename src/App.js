@@ -98,7 +98,7 @@ function App() {
         const GE = new fp.GestureEstimator(
           Object.keys(handSigns).map((handSign) => handSigns[handSign])
         );
-        const gesture = await GE.estimate(hand[0].landmarks, 7.5); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        const gesture = await GE.estimate(hand[0].landmarks, 8.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {

@@ -24,6 +24,8 @@ import Laam_Letter from './Laam.png';
 import Meem_Letter from './Meem.png';
 import Noon_Letter from './Noon.png';
 import Heh_Letter from './Heh.png';
+import Wow_Letter from './Wow.png';
+import Yeh_Letter from './Yeh.png';
 
 const lettersPNG = {
   Alef_Letter,
@@ -52,6 +54,8 @@ const lettersPNG = {
   Meem_Letter,
   Noon_Letter,
   Heh_Letter,
+  Wow_Letter,
+  Yeh_Letter,
 };
 
 export default lettersPNG;
