@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, Typography, TextField } from '@material-ui/core';
 
 export default function SignIn() {
   const emailRef = useRef();
@@ -8,6 +9,7 @@ export default function SignIn() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { signin } = useAuth();
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -16,6 +18,7 @@ export default function SignIn() {
       setError('');
       setLoading(true);
       await signin(emailRef.current.value, passwordRef.current.value);
+      history.push('/dashboard');
     } catch (error) {
       setError(`${error.message}`);
       console.log(error);
@@ -24,19 +27,26 @@ export default function SignIn() {
   }
 
   return (
-    <div>
-      <h2>Sign In</h2>
-      {error && <div>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input type="email" ref={emailRef} />
-        <input type="password" ref={passwordRef} />
-        <button type="submit" disabled={loading}>
-          Sign In
-        </button>
-      </form>
-
-      <div>
-        Need an account? <Link to="/signup">Sign Up</Link>
+    <div className="centerme">
+      <div className="logo">Al-Labib Logo</div>
+      <div className="formdiv">
+        <Typography variant="h2">SIGN IN</Typography>
+        {error && <div>{error}</div>}
+        <form className="veritcalform" onSubmit={handleSubmit}>
+          <TextField type="email" label="Email" ref={emailRef} />
+          <TextField type="password" label="Password" ref={passwordRef} />
+          <br />
+          <br />
+          <Button type="submit" disabled={loading}>
+            Sign In
+          </Button>
+        </form>
+        <Button variant="outlined" onClick={() => history.push('/')}>
+          Back
+        </Button>
+        <div>
+          Need an account? <Link to="/signup">Sign Up</Link>
+        </div>
       </div>
     </div>
   );

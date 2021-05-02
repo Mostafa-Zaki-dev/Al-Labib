@@ -1,0 +1,29 @@
+.centerme {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 2px solid #f6a400;
+  border-radius: 10%;
+  text-align: center;
+  align-content: center;
+  padding: 15px;
+  margin: auto;
+  background-color: #fef5e4;
+  height: 550px;
+  width: 300px;
+
+  position: relative;
+  top: 5vh;
+}
+
+.verticalform {
+  text-align: match-parent;
+  width: 200px;
+  height: 350px;
+}
+.formdiv {
+  border-radius: 10%;
+  background-color: #ffffff;
+  opacity: 70%;
+  padding: 10px;
+}
