@@ -38,9 +38,9 @@ export default function SignUp() {
         <Typography variant="h2">SIGN UP</Typography>
         {error && <div>{error}</div>}
         <form className="veritcalform" onSubmit={handleSubmit}>
-          <TextField type="email" label="Email" ref={emailRef} />
-          <TextField type="password" label="Password" ref={passwordRef} />
-          <TextField type="password" label="Confirm Password" ref={passwordConfirmRef} />
+          <TextField type="email" label="Email" inputRef={emailRef} />
+          <TextField type="password" label="Password" inputRef={passwordRef} />
+          <TextField type="password" label="Confirm Password" inputRef={passwordConfirmRef} />
           <br />
           <br />
           <Button variant="contained" color="primary" type="submit" disabled={loading}>
