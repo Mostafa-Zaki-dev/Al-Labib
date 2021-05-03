@@ -22,8 +22,8 @@ export default function SignIn() {
     } catch (error) {
       setError(`${error.message}`);
       console.log(error);
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (

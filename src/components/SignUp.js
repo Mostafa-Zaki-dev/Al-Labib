@@ -27,8 +27,8 @@ export default function SignUp() {
     } catch (error) {
       setError(`${error.message}`);
       console.log(error);
+      setLoading(false);
     }
-    setLoading(false);
   }
 
   return (
