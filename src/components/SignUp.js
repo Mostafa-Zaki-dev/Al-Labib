@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { Button, Typography, TextField } from '@material-ui/core';
 
 export default function SignUp() {
   const emailRef = useRef();
@@ -9,6 +10,7 @@ export default function SignUp() {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
+  const history = useHistory();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -21,6 +23,7 @@ export default function SignUp() {
       setError('');
       setLoading(true);
       await signup(emailRef.current.value, passwordRef.current.value);
+      history.push('/dashboard');
     } catch (error) {
       setError(`${error.message}`);
       console.log(error);
@@ -29,20 +32,31 @@ export default function SignUp() {
   }
 
   return (
-    <div>
-      <h2>Sign Up</h2>
-      {error && <div>{error}</div>}
-      <form onSubmit={handleSubmit}>
-        <input type="email" ref={emailRef} />
-        <input type="password" ref={passwordRef} />
-        <input type="password" ref={passwordConfirmRef} />
-        <button type="submit" disabled={loading}>
-          Sign Up
-        </button>
-      </form>
-
-      <div>
-        Already have an account? <Link to="/signin">Sign In</Link>
+    <div className="centerme">
+      <div className="logo">Al-Labib Logo</div>
+      <div className="formdiv">
+        <Typography variant="h2">SIGN UP</Typography>
+        {error && <div>{error}</div>}
+        <form className="veritcalform" onSubmit={handleSubmit}>
+          <TextField type="email" label="Email" ref={emailRef} />
+          <TextField type="password" label="Password" ref={passwordRef} />
+          <TextField type="password" label="Confirm Password" ref={passwordConfirmRef} />
+          <br />
+          <br />
+          <Button variant="contained" color="primary" type="submit" disabled={loading}>
+            Sign Up
+          </Button>
+          <br />
+          <br />
+        </form>
+        <Button variant="outlined" onClick={() => history.push('/')}>
+          Back
+        </Button>
+        <br />
+        <br />
+        <div>
+          Already have an account? <Link to="/signin">Sign In</Link>
+        </div>
       </div>
     </div>
   );

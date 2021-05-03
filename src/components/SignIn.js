@@ -37,13 +37,17 @@ export default function SignIn() {
           <TextField type="password" label="Password" ref={passwordRef} />
           <br />
           <br />
-          <Button type="submit" disabled={loading}>
+          <Button variant="contained" color="primary" type="submit" disabled={loading}>
             Sign In
           </Button>
+          <br />
+          <br />
         </form>
         <Button variant="outlined" onClick={() => history.push('/')}>
           Back
         </Button>
+        <br />
+        <br />
         <div>
           Need an account? <Link to="/signup">Sign Up</Link>
         </div>
