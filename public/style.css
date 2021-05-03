@@ -1,19 +1,22 @@
+body {
+  background-color: #e3f2fd;
+}
 .centerme {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 2px solid #f6a400;
-  border-radius: 10%;
+  justify-items: center;
   text-align: center;
+  align-items: center;
   align-content: center;
   padding: 15px;
   margin: auto;
-  background-color: #89cff0;
-  height: 550px;
-  width: 300px;
-
   position: relative;
   top: 5vh;
+  /* border: 2px solid #f6a400;
+  border-radius: 10%; */
+  height: 550px;
+  /* width: 300px; */
 }
 
 .verticalform {
@@ -26,9 +29,14 @@
   background-color: #ffffff;
   opacity: 70%;
   padding: 10px;
+  min-width: 70%;
 }
 
 .logo {
   padding: 10px;
   /* margin: auto; */
+}
+
+.landingbody {
+  text-align: match-parent;
 }
