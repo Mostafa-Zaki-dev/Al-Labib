@@ -1,4 +1,11 @@
-import { createMuiTheme } from '@material-ui/core';
+import { unstable_createMuiStrictModeTheme as createMuiTheme } from '@material-ui/core';
+/* 
+Using the unstable StrictMode Theme to avoid the warning accompanied with Navbar SwipeableDrawer that conflicts with React StrictMode in development env. that states the below :
+"Warning: findDOMNode is deprecated in StrictMode. findDOMNode was passed an instance 
+of 
+Transition which is inside StrictMode. Instead, add a ref directly to the element you 
+want to reference. Learn more about using refs safely .... "
+*/
 
 const theme = createMuiTheme({
   palette: {
