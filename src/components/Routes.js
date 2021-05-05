@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import theme from '../contexts/Theme';
 import { ThemeProvider } from '@material-ui/core';
 import Navbar from './Navbar';
+import Dashboard from './Dashboard';
 
 export default function Routes() {
   return (
@@ -18,6 +19,7 @@ export default function Routes() {
             <Route exact path="/" component={LandingPage} />
             <Route path="/signup" component={SignUp} />
             <Route path="/signin" component={SignIn} />
+            <Route path="/dashboard" component={Dashboard} />
             <Route path="/app" component={App} />
           </Switch>
         </AuthProvider>
