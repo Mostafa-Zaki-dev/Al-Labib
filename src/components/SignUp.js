@@ -1,12 +1,14 @@
 import { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Typography, TextField } from '@material-ui/core';
+import { Button, Typography, TextField, FormControl } from '@material-ui/core';
 
 export default function SignUp() {
   const emailRef = useRef();
   const passwordRef = useRef();
   const passwordConfirmRef = useRef();
+  const firstNameRef = useRef();
+  const lastNameRef = useRef();
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
   const { signup } = useAuth();
@@ -16,13 +18,18 @@ export default function SignUp() {
     e.preventDefault();
 
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
-      return setError('Password do not match');
+      return setError('Passwords do not match');
     }
 
     try {
       setError('');
       setLoading(true);
-      await signup(emailRef.current.value, passwordRef.current.value);
+      await signup(
+        emailRef.current.value,
+        passwordRef.current.value,
+        firstNameRef.current.value,
+        lastNameRef.current.value
+      );
       history.push('/dashboard');
     } catch (error) {
       setError(`${error.message}`);
@@ -37,30 +44,28 @@ export default function SignUp() {
       <div className="formdiv">
         <Typography variant="h2">SIGN UP</Typography>
         {error && <div>{error}</div>}
-        <form className="veritcalform" onSubmit={handleSubmit}>
+        <FormControl>
+          <TextField required type="text" label="First Name" inputRef={firstNameRef} />
+          <TextField required type="text" label="Last Name" inputRef={lastNameRef} />
           <TextField required type="email" label="Email" inputRef={emailRef} />
-          <br />
           <TextField required type="password" label="Password" inputRef={passwordRef} />
-          <br />
           <TextField
             required
             type="password"
             label="Confirm Password"
             inputRef={passwordConfirmRef}
           />
-          <br />
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading} onClick={handleSubmit}>
             Sign Up
           </Button>
-          <br />
-        </form>
-        <Button variant="outlined" onClick={() => history.push('/')}>
-          Back Home
-        </Button>
+          <Button variant="outlined" onClick={() => history.push('/')}>
+            Back Home
+          </Button>
+        </FormControl>
         <br />
         <br />
         <div>
-          Already have an account? <Link to="/signin">Sign In</Link>
+          Already have an account? <Link to="/signin">Sign in</Link>
         </div>
       </div>
     </div>

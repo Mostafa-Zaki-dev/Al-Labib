@@ -17,7 +17,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiTypography: {
       root: {
-        marginBottom: 20,
+        marginBottom: 5,
       },
     },
 
@@ -26,7 +26,7 @@ const theme = createMuiTheme({
         borderRadius: 50,
         minWidth: 160,
         height: 40,
-        margin: 10,
+        margin: 5,
         fontWeight: 'bold',
       },
     },
@@ -34,9 +34,14 @@ const theme = createMuiTheme({
     MuiTextField: {
       root: {
         padding: 7,
-        height: 50,
+        height: 35,
         margin: 5,
         minWidth: 300,
+      },
+    },
+    MuiListItemIcon: {
+      root: {
+        minWidth: 35,
       },
     },
   },
@@ -48,6 +53,7 @@ const theme = createMuiTheme({
     },
     MuiTextField: {
       variant: 'outlined',
+      size: 'small',
     },
   },
 });

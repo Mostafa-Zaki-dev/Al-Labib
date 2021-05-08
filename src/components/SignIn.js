@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 import { useAuth } from '../contexts/AuthContext';
 import { Link, useHistory } from 'react-router-dom';
-import { Button, Typography, TextField } from '@material-ui/core';
+import { Button, Typography, TextField, FormControl } from '@material-ui/core';
 
 export default function SignIn() {
   const emailRef = useRef();
@@ -32,18 +32,16 @@ export default function SignIn() {
       <div className="formdiv">
         <Typography variant="h2">SIGN IN</Typography>
         {error && <div>{error}</div>}
-        <form className="veritcalform" onSubmit={handleSubmit}>
+        <FormControl>
           <TextField required type="email" label="Email" inputRef={emailRef} />
-          <br />
           <TextField required type="password" label="Password" inputRef={passwordRef} />
-          <br />
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={loading} onClick={handleSubmit}>
             Sign In
           </Button>
-        </form>
-        <Button size="small" variant="outlined" onClick={() => history.push('/')}>
-          Back Home
-        </Button>
+          <Button size="small" variant="outlined" onClick={() => history.push('/')}>
+            Back Home
+          </Button>
+        </FormControl>
         <br />
         <br />
         <div>

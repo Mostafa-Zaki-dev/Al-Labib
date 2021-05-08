@@ -6,15 +6,23 @@ import {
   IconButton,
   List,
   ListItem,
+  ListItemIcon,
   ListItemText,
   Avatar,
   Divider,
   makeStyles,
+  Typography,
+  Box,
 } from '@material-ui/core';
 import AvatarIcon from '@material-ui/icons/AccountCircle';
+import DashboardIcon from '@material-ui/icons/Dashboard';
+import PersonIcon from '@material-ui/icons/Person';
+import InfoIcon from '@material-ui/icons/Info';
+import SettingsIcon from '@material-ui/icons/Settings';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import theme from '../contexts/Theme';
-
+import { useAuth } from '../contexts/AuthContext';
 const useStyles = makeStyles({
   DrawerList: {
     minWidth: 250,
@@ -28,6 +36,9 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const nodeRef = useRef(null);
+  const { dbUser, signout, currentUser } = useAuth();
+
+  console.log('dbUser >>>', dbUser);
   return (
     <React.Fragment>
       <AppBar position="fixed">
@@ -42,20 +53,65 @@ export default function Navbar() {
             onOpen={() => {}}
           >
             <div className={classes.DrawerList} ref={nodeRef}>
-              <Avatar className={classes.Avatar}>
-                <AvatarIcon color="secondary" fontSize="large" />
-              </Avatar>
+              <Box textAlign="center">
+                <Avatar className={classes.Avatar}>
+                  <AvatarIcon color="secondary" fontSize="large" />
+                </Avatar>
+                {dbUser && currentUser ? (
+                  <Typography variant="h5">Hi, {dbUser.firstName}</Typography>
+                ) : (
+                  ''
+                )}
+              </Box>
               <Divider />
               <List>
                 <ListItem button onClick={() => {}}>
+                  <ListItemIcon>
+                    <DashboardIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Dashboard" />
+                </ListItem>
+                <ListItem button onClick={() => {}}>
+                  <ListItemIcon>
+                    <PersonIcon />
+                  </ListItemIcon>
                   <ListItemText primary="Profile" />
                 </ListItem>
+                <ListItem button onClick={() => {}}>
+                  <ListItemIcon>
+                    <InfoIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="About Us" />
+                </ListItem>
+                <br />
+                <ListItem button onClick={() => {}}>
+                  <ListItemIcon>
+                    <SettingsIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Settings" />
+                </ListItem>
               </List>
+              <br />
+              <br />
+              <br />
+              <br />
+              <Divider />
+              <ListItem
+                button
+                onClick={() => {
+                  setOpen(false);
+                  signout();
+                }}
+              >
+                <ListItemIcon>
+                  <ExitToAppIcon />
+                </ListItemIcon>
+                <ListItemText primary="Sign Out" />
+              </ListItem>
             </div>
           </SwipeableDrawer>
         </Toolbar>
       </AppBar>
-      <Toolbar /> {/* rendering another Toolbar to prevent content behind Navbar */}
     </React.Fragment>
   );
 }
