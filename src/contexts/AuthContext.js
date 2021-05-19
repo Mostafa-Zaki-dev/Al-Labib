@@ -12,7 +12,6 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [currentUser, setCurrentUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [dbUser, setDbUser] = useState(null);
   const history = useHistory();
 
   function signin(email, password) {
@@ -31,6 +30,54 @@ export function AuthProvider({ children }) {
             firstName: firstName,
             lastName: lastName,
             points: 0,
+            checkpoints: 0,
+            progress: {
+              'Level 1': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 2': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 3': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 4': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 5': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 6': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 7': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 8': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+              'Level 9': {
+                learn: false,
+                practice: false,
+                text: false,
+              },
+            },
           })
           .catch((error) => {
             console.log('Something went wrong with adding user to firestore:', error);
@@ -55,22 +102,11 @@ export function AuthProvider({ children }) {
     return unsubscribe; //not necessary but will leave it for now
   }, []);
 
-  useEffect(() => {
-    if (currentUser) {
-      const userRef = db.collection('Users').doc(currentUser.uid);
-      (async () => {
-        let userDb = await userRef.get();
-        setDbUser(userDb.data());
-      })();
-    }
-  }, [currentUser]);
-
   const value = {
     currentUser,
     signup,
     signin,
     signout,
-    dbUser,
   };
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }

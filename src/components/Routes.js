@@ -3,6 +3,7 @@ import SignIn from './SignIn';
 import LandingPage from './LandingPage';
 import App from '../App';
 import { AuthProvider } from '../contexts/AuthContext';
+import { UserProvider } from '../contexts/UserContext';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import theme from '../contexts/Theme';
 import { makeStyles, ThemeProvider } from '@material-ui/core';
@@ -19,15 +20,17 @@ export default function Routes() {
     <ThemeProvider theme={theme}>
       <Router>
         <AuthProvider>
-          <Navbar />
-          <div className={classes.offset} />
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/signup" component={SignUp} />
-            <Route path="/signin" component={SignIn} />
-            <Route path="/dashboard" component={Dashboard} />
-            <Route path="/app" component={App} />
-          </Switch>
+          <UserProvider>
+            <Navbar />
+            <div className={classes.offset} />
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/signup" component={SignUp} />
+              <Route path="/signin" component={SignIn} />
+              <Route path="/dashboard" component={Dashboard} />
+              <Route path="/app" component={App} />
+            </Switch>
+          </UserProvider>
         </AuthProvider>
       </Router>
     </ThemeProvider>
