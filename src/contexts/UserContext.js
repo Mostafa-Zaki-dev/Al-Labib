@@ -1,5 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { auth, db } from '../firebase-config';
+import { db } from '../firebase-config';
+import { useAuth } from '../contexts/AuthContext';
 
 const UserContext = React.createContext();
 
@@ -9,7 +10,9 @@ export function useUser() {
 
 export function UserProvider({ children }) {
   const [dbUser, setDbUser] = useState(null);
-  const isLoggedIn = auth.currentUser;
+  // const isLoggedIn = auth.currentUser;  // changed to currentUser from AuthContext to be rendered in Navbar
+  const { currentUser } = useAuth();
+  const isLoggedIn = currentUser;
 
   useEffect(() => {
     if (isLoggedIn) {

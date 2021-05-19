@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   AppBar,
   Toolbar,
@@ -23,6 +23,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import theme from '../contexts/Theme';
 import { useAuth } from '../contexts/AuthContext';
+import { useUser } from '../contexts/UserContext';
 const useStyles = makeStyles({
   DrawerList: {
     minWidth: 250,
@@ -36,9 +37,15 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
   const nodeRef = useRef(null);
-  const { dbUser, signout, currentUser } = useAuth();
+  const { signout, currentUser } = useAuth();
+  const { dbUser, getDbUser } = useUser();
 
+  useEffect(() => {
+    getDbUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   console.log('dbUser >>>', dbUser);
+
   return (
     <React.Fragment>
       <AppBar position="fixed">
