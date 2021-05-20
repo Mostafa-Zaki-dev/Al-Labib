@@ -44,6 +44,15 @@ const theme = createMuiTheme({
         minWidth: 35,
       },
     },
+    MuiDialog: {
+      paper: {
+        borderRadius: 20,
+        opacity: '80%',
+        padding: '8%',
+        paddingTop: '5%',
+        paddingBottom: '5%',
+      },
+    },
   },
 
   props: {

@@ -44,7 +44,7 @@ export default function Navbar() {
     getDbUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log('dbUser >>>', dbUser);
+  // console.log('dbUser >>>', dbUser);
 
   return (
     <React.Fragment>
