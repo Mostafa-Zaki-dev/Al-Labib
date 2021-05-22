@@ -9,6 +9,7 @@ import theme from '../contexts/Theme';
 import { makeStyles, ThemeProvider } from '@material-ui/core';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
+import TrailApp from './TrialApp';
 
 const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
@@ -28,7 +29,7 @@ export default function Routes() {
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               <Route path="/dashboard" component={Dashboard} />
-              <Route path="/app" component={App} />
+              <Route path="/app" component={TrailApp} />
             </Switch>
           </UserProvider>
         </AuthProvider>

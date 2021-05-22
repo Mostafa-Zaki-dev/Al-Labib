@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import '@tensorflow/tfjs'; //loading Tensoflow.JS
 import * as handpose from '@tensorflow-models/handpose';
 import Webcam from 'react-webcam';
-import './App.css';
+// import './App.css';
 import { drawHand } from './utilities';
 import * as fp from 'fingerpose';
 import handSigns from './handsigns';
@@ -99,7 +99,7 @@ function App() {
           Object.keys(handSigns).map((handSign) => handSigns[handSign])
         );
         const gesture = await GE.estimate(hand[0].landmarks, 8.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        console.log('gesture >>>', gesture);
+        // console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           // console.log('gesture.gestures >>>>', gesture.gestures);
