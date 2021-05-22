@@ -13,6 +13,8 @@ export function UserProvider({ children }) {
   // const isLoggedIn = auth.currentUser;  // changed to currentUser from AuthContext to be rendered in Navbar
   const { currentUser } = useAuth();
   const isLoggedIn = currentUser;
+  const [levels, setLevels] = useState({});
+  const [currentLevel, setCurrentLevel] = useState({});
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -37,10 +39,29 @@ export function UserProvider({ children }) {
     }
   }
 
+  function getLevels() {
+    const levelsRef = db.collection('Levels');
+    const levels = {};
+    levelsRef.get().then((snapshot) => {
+      snapshot.docs.forEach((doc) => {
+        const level = doc.data();
+        levels[level.name] = {
+          detect: level.detect,
+          promptArr: level.promptArr,
+        };
+      });
+      setLevels(levels);
+    });
+  }
+
   const value = {
     dbUser,
-    getDbUser,
     setDbUser,
+    getDbUser,
+    getLevels,
+    levels,
+    setCurrentLevel,
+    currentLevel,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

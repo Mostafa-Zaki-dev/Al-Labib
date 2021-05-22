@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const meemSign = new GestureDescription('Meem_Letter');
+export const meemSign = new GestureDescription('م');
 
 /* 
 poseData right hand 

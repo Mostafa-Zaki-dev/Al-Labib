@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const sheenSign = new GestureDescription('Sheen_Letter');
+export const sheenSign = new GestureDescription('ش');
 
 /* 
 poseData Right hand

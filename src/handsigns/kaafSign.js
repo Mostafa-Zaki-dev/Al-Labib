@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const kaafSign = new GestureDescription('Kaaf_Letter');
+export const kaafSign = new GestureDescription('ك');
 
 /* 
 poseData

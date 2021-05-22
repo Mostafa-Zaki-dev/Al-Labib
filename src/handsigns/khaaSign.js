@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const khaaSign = new GestureDescription('Khaa_Letter');
+export const khaaSign = new GestureDescription('خ');
 
 /* 
 0: (3) ["Thumb", "No Curl", "Diagonal Up Right"]

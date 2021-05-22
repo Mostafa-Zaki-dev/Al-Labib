@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const hehSign = new GestureDescription('Heh_Letter');
+export const hehSign = new GestureDescription('ه');
 
 /* 
 poseData right hand 

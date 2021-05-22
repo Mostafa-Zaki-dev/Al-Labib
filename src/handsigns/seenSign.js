@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const seenSign = new GestureDescription('Seen_Letter');
+export const seenSign = new GestureDescription('س');
 
 /* 
 0: (3) ["Thumb", "No Curl", "Vertical Up"]

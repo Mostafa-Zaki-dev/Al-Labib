@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const wowSign = new GestureDescription('Wow_Letter');
+export const wowSign = new GestureDescription('و');
 
 /* 
 poseData right hand 

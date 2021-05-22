@@ -10,8 +10,7 @@ const useStyles = makeStyles({
     margin: 5,
   },
 });
-function Level(props) {
-  const { name, levelNum } = props;
+function Level({ name, levelNum }) {
   const classes = useStyles();
   const { dbUser } = useUser();
   const [showModal, setShowModal] = useState(false);

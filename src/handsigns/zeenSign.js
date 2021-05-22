@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const zeenSign = new GestureDescription('Zeen_Letter');
+export const zeenSign = new GestureDescription('ز');
 
 /* 
 poseData Left hand  

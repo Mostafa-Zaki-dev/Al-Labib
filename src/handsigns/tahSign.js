@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const tahSign = new GestureDescription('Tah_Letter');
+export const tahSign = new GestureDescription('ط');
 
 /*
 poseData Left hand  

@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const saadSign = new GestureDescription('Saad_Letter');
+export const saadSign = new GestureDescription('ص');
 
 /*
 poseData Left hand  

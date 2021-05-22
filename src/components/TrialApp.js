@@ -6,6 +6,7 @@ import Webcam from 'react-webcam';
 import handSigns from '../handsigns';
 import { Typography } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
+import { useUser } from '../contexts/UserContext';
 
 let importedLetters = ['Alef_Letter', 'Beh_Letter', 'Teh_Letter', 'Theh_Letter'];
 
@@ -13,7 +14,8 @@ function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
   // const [points, setPoints] = useState(0);
-  const [promptArr, setPromptArr] = useState(importedLetters);
+  const { currentLevel } = useUser();
+  const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [prompt, setPrompt] = useState('');
 
   const runHandpose = async () => {
@@ -56,9 +58,9 @@ function TrailApp() {
 
       if (hand.length > 0) {
         const GE = new fp.GestureEstimator(
-          Object.keys(handSigns).map((handSign) => handSigns[handSign])
+          currentLevel.detect.map((handSign) => handSigns[handSign])
         );
-        const gesture = await GE.estimate(hand[0].landmarks, 8.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        const gesture = await GE.estimate(hand[0].landmarks, 7.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
         // console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {

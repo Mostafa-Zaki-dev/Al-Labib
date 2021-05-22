@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const jeemSign = new GestureDescription('Jeem_Letter');
+export const jeemSign = new GestureDescription('ج');
 
 /* 
 poseData right hand face 

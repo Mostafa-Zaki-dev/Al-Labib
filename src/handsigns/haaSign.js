@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const haaSign = new GestureDescription('Haa_Letter');
+export const haaSign = new GestureDescription('ح');
 
 //Thumb (No curl, Vertical up)
 haaSign.addCurl(Finger.Thumb, FingerCurl.NoCurl, 1.0);

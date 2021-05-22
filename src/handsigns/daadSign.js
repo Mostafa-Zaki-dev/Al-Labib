@@ -1,6 +1,6 @@
 import { Finger, FingerCurl, FingerDirection, GestureDescription } from 'fingerpose';
 
-export const daadSign = new GestureDescription('Daad_Letter');
+export const daadSign = new GestureDescription('ض');
 
 /*
 poseData Left hand  

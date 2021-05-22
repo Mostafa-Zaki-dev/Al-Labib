@@ -1,11 +1,17 @@
 import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
 
 export default function LevelSummary({ name, show }) {
-  const { dbUser } = useUser();
+  const { dbUser, levels, getLevels, setCurrentLevel } = useUser();
   const history = useHistory();
   let levelsCompleted = 0;
+
+  useEffect(() => {
+    getLevels();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (dbUser) {
     let progress = dbUser.progress[name];
@@ -13,6 +19,12 @@ export default function LevelSummary({ name, show }) {
       if (progress[key] === true) levelsCompleted++;
     }
   }
+
+  function handleClick() {
+    setCurrentLevel(levels[name]);
+    history.push('/app');
+  }
+
   return (
     <Dialog open={show}>
       <Typography variant="h2">{name}</Typography>
@@ -22,7 +34,7 @@ export default function LevelSummary({ name, show }) {
           <ListItemText primary={levelsCompleted + '/3'} />
         </ListItem>
       </List>
-      <Button onClick={() => history.push('/app')}>Begin</Button>
+      <Button onClick={handleClick}>Begin</Button>
     </Dialog>
   );
 }
