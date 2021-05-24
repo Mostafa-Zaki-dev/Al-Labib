@@ -7,16 +7,20 @@ import handSigns from '../handsigns';
 import { Typography } from '@material-ui/core';
 import { ThumbUp } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
-
-let importedLetters = ['Alef_Letter', 'Beh_Letter', 'Teh_Letter', 'Theh_Letter'];
+import { Redirect } from 'react-router-dom';
 
 function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
-  // const [points, setPoints] = useState(0);
   const { currentLevel } = useUser();
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [prompt, setPrompt] = useState('');
+  const [gameEnd, setGameEnd] = useState(false);
+
+  let pointsMemory = {};
+  if (letter != null && letter === prompt) {
+    pointsMemory[letter] = true;
+  }
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -78,9 +82,12 @@ function TrailApp() {
   //display the prompt every 5 seconds
   const displayPrompt = () => {
     let i = 0;
-    // const interval =
-    setInterval(() => {
+    const interval = setInterval(() => {
       setPrompt(promptArr[i++]);
+      if (i > promptArr.length) {
+        clearInterval(interval);
+        setGameEnd(true);
+      }
     }, 5000);
   };
 
@@ -90,7 +97,10 @@ function TrailApp() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return (
+  const maxLevelPts = promptArr.length;
+  let totalPts = Object.keys(pointsMemory).length;
+
+  return !gameEnd ? (
     <div className="App video-container">
       <header>
         <Webcam className="video" ref={webcamRef} />
@@ -116,6 +126,8 @@ function TrailApp() {
         </div>
       </div>
     </div>
+  ) : (
+    <Redirect to={{ pathname: '/levelsummary', state: { totalPts, maxLevelPts } }} />
   );
 }
 

@@ -1,8 +1,8 @@
 import { Grid, Card, CardMedia, Typography, makeStyles } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
 import { useUser } from '../contexts/UserContext';
-import React, { useState } from 'react';
-import LevelSummary from './LevelSummary';
+import React, { useState, useEffect } from 'react';
+import LevelDescription from './LevelDescription';
 
 const useStyles = makeStyles({
   media: {
@@ -17,11 +17,15 @@ function Level({ name, levelNum }) {
   const n = levelNum - 2;
   let cp;
 
+  console.log('Level rendered');
   if (dbUser) {
     cp = dbUser.checkpoints;
+    // console.log('cp >>', cp);
   }
   const levelUnlock = cp >= 2 + 3 * n;
-
+  const ratingValue = cp >= 3 * levelNum ? 3 : cp - 3 * (levelNum - 1);
+  // console.log('ratingValue', ratingValue);
+  // console.log('levelNum', levelNum);
   const handleClick = (e) => {
     e.preventDefault();
     if (levelNum === 1) {
@@ -35,10 +39,10 @@ function Level({ name, levelNum }) {
 
   return levelNum === 1 ? (
     <Grid item xs={6} sm={4} md={2}>
-      <Rating size="large" value={0} max={3} readOnly />
+      <Rating size="large" value={ratingValue} max={3} readOnly />
       <Card className={classes.media} raised onClick={handleClick}>
         <CardMedia component="img" image="/levels/1.png" title={name} alt={name} />
-        <LevelSummary name={name} show={showModal} />
+        <LevelDescription name={name} show={showModal} />
       </Card>
       <Typography variant="h5" gutterBottom>
         {name}
@@ -46,7 +50,7 @@ function Level({ name, levelNum }) {
     </Grid>
   ) : (
     <Grid item xs={6} sm={4} md={2}>
-      <Rating size="large" value={0} max={3} readOnly />
+      <Rating size="large" value={ratingValue} max={3} readOnly />
       <Card className={classes.media} raised onClick={handleClick}>
         <CardMedia
           component="img"
@@ -54,7 +58,7 @@ function Level({ name, levelNum }) {
           title={name}
           alt={name}
         />
-        <LevelSummary name={name} show={showModal} />
+        <LevelDescription name={name} show={showModal} />
       </Card>
       <Typography variant="h5" gutterBottom>
         {name}

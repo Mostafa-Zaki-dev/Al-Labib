@@ -100,3 +100,20 @@ body {
   font-size: 30px;
   font-family: 'Gill Sans';
 }
+
+.game-summary-container {
+  /* overflow: hidden; */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border-radius: 10%;
+  text-align: center;
+  align-content: center;
+  padding: 30px;
+  margin: 10px;
+  margin-top: 1%;
+  background-color: #ffffff;
+  opacity: 70%;
+  max-width: 600px;
+  min-width: 70%;
+}

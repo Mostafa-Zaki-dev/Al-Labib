@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import {
   AppBar,
   Toolbar,
@@ -24,6 +25,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import theme from '../contexts/Theme';
 import { useAuth } from '../contexts/AuthContext';
 import { useUser } from '../contexts/UserContext';
+
 const useStyles = makeStyles({
   DrawerList: {
     minWidth: 250,
@@ -39,6 +41,7 @@ export default function Navbar() {
   const nodeRef = useRef(null);
   const { signout, currentUser } = useAuth();
   const { dbUser, getDbUser } = useUser();
+  const history = useHistory();
 
   useEffect(() => {
     getDbUser();
@@ -72,7 +75,13 @@ export default function Navbar() {
               </Box>
               <Divider />
               <List>
-                <ListItem button onClick={() => {}}>
+                <ListItem
+                  button
+                  onClick={() => {
+                    history.push('/dashboard');
+                    setOpen(false);
+                  }}
+                >
                   <ListItemIcon>
                     <DashboardIcon />
                   </ListItemIcon>

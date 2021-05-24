@@ -1,40 +1,29 @@
-import { useUser } from '../contexts/UserContext';
+import React from 'react';
 import { useHistory } from 'react-router-dom';
-import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
+import { Button, Typography } from '@material-ui/core';
+import GradeIcon from '@material-ui/icons/Grade';
 
-export default function LevelSummary({ name, show }) {
-  const { dbUser, levels, getLevels, setCurrentLevel } = useUser();
+export default function LevelSummary() {
+  // document.body.style = "background: #35BAF6;";
   const history = useHistory();
-  let levelsCompleted = 0;
-
-  useEffect(() => {
-    getLevels();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  if (dbUser) {
-    let progress = dbUser.progress[name];
-    for (let key in progress) {
-      if (progress[key] === true) levelsCompleted++;
-    }
-  }
-
-  function handleClick() {
-    setCurrentLevel(levels[name]);
-    history.push('/app');
-  }
 
   return (
-    <Dialog open={show}>
-      <Typography variant="h2">{name}</Typography>
-      <List>
-        <ListItem>
-          <ListItemText primary="Levels" />
-          <ListItemText primary={levelsCompleted + '/3'} />
-        </ListItem>
-      </List>
-      <Button onClick={handleClick}>Begin</Button>
-    </Dialog>
+    <div className="centerme">
+      <div className="game-summary-container">
+        <div>
+          <Typography variant="h2">Level Summary</Typography>
+          <Typography>Total Points</Typography>
+          <GradeIcon color="primary" style={{ fontSize: 100 }}></GradeIcon>
+          <br />
+          {/* <Button onClick={() => history.push('/')}>Next</Button> */}
+          <Button variant="outlined" onClick={() => history.push('/app')}>
+            Play Again
+          </Button>
+          <Button variant="outlined" onClick={() => history.push('/dashboard')}>
+            Dashboard
+          </Button>
+        </div>
+      </div>
+    </div>
   );
 }

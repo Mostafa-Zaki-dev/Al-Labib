@@ -10,6 +10,7 @@ import { makeStyles, ThemeProvider } from '@material-ui/core';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import TrailApp from './TrialApp';
+import LevelSummary from './LevelSummary';
 
 const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
@@ -30,6 +31,7 @@ export default function Routes() {
               <Route path="/signin" component={SignIn} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/app" component={TrailApp} />
+              <Route pathh="/levelsummary" component={LevelSummary} />
             </Switch>
           </UserProvider>
         </AuthProvider>

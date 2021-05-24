@@ -16,6 +16,8 @@ export function UserProvider({ children }) {
   const [levels, setLevels] = useState({});
   const [currentLevel, setCurrentLevel] = useState({});
 
+  // console.log('UserContext renedered');
+
   useEffect(() => {
     if (isLoggedIn) {
       const userRef = db.collection('Users').doc(isLoggedIn.uid);
@@ -28,14 +30,13 @@ export function UserProvider({ children }) {
     }
   }, [isLoggedIn]);
 
-  function getDbUser() {
+  async function getDbUser() {
     if (isLoggedIn) {
-      db.collection('Users')
-        .doc(isLoggedIn.uid)
-        .get()
-        .then((user) => {
-          setDbUser(user.data());
-        });
+      const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+      const dbUser = user.data();
+      setDbUser(dbUser);
+      // console.log('dbUser form getDbUser :', dbUser);
+      return dbUser;
     }
   }
 
@@ -48,12 +49,26 @@ export function UserProvider({ children }) {
         levels[level.name] = {
           detect: level.detect,
           promptArr: level.promptArr,
+          name: level.name,
         };
       });
       setLevels(levels);
     });
   }
 
+  function updateDbUserPts(pts) {
+    db.collection('Users').doc(isLoggedIn.uid).update({ points: pts });
+  }
+
+  function updateDbUserCp(cp) {
+    db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
+  }
+
+  function updateDbUserProgress(levelName, difficulty) {
+    let progressUpdate = {};
+    progressUpdate[`progress.${levelName}.${difficulty}`] = true;
+    db.collection('Users').doc(isLoggedIn.uid).update(progressUpdate);
+  }
   const value = {
     dbUser,
     setDbUser,
@@ -62,6 +77,9 @@ export function UserProvider({ children }) {
     levels,
     setCurrentLevel,
     currentLevel,
+    updateDbUserPts,
+    updateDbUserProgress,
+    updateDbUserCp,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
