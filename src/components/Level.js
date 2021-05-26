@@ -1,7 +1,7 @@
 import { Grid, Card, CardMedia, Typography, makeStyles } from '@material-ui/core';
 import Rating from '@material-ui/lab/Rating';
-import { useUser } from '../contexts/UserContext';
-import React, { useState, useEffect } from 'react';
+// import { useUser } from '../contexts/UserContext';
+import React, { useState } from 'react';
 import LevelDescription from './LevelDescription';
 
 const useStyles = makeStyles({
@@ -10,9 +10,12 @@ const useStyles = makeStyles({
     margin: 5,
   },
 });
-function Level({ name, levelNum }) {
+
+// use React.memo to improve performance by using memoization approach instead of useContext to avoid unnecessary re-renders
+
+const Level = React.memo(({ dbUser, name, levelNum }) => {
   const classes = useStyles();
-  const { dbUser } = useUser();
+  // const { dbUser } = useUser();
   const [showModal, setShowModal] = useState(false);
   const n = levelNum - 2;
   let cp;
@@ -65,6 +68,6 @@ function Level({ name, levelNum }) {
       </Typography>
     </Grid>
   );
-}
+});
 
 export default Level;

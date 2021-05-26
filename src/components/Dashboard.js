@@ -6,12 +6,13 @@ import React, { useEffect } from 'react';
 const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Dashboard() {
-  const { getDbUser } = useUser();
+  const { dbUser, getDbUser, getLevels } = useUser();
   // console.log('dbUser Dashboard', dbUser);
-  // console.log('dashboard rendered >>');
+  console.log('dashboard rendered >>');
 
   useEffect(() => {
     getDbUser();
+    getLevels();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -20,7 +21,7 @@ function Dashboard() {
       <Typography variant="h3"> Get to Learn</Typography>
       <Grid container spacing={3}>
         {levels.map((level) => (
-          <Level key={level} name={`Level ${level}`} levelNum={level}></Level>
+          <Level key={level} dbUser={dbUser} name={`Level ${level}`} levelNum={level}></Level>
         ))}
       </Grid>
     </Container>

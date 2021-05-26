@@ -15,6 +15,7 @@ export function UserProvider({ children }) {
   const isLoggedIn = currentUser;
   const [levels, setLevels] = useState({});
   const [currentLevel, setCurrentLevel] = useState({});
+  const [difficulty, setDifficulty] = useState(null);
 
   // console.log('UserContext renedered');
 
@@ -28,9 +29,11 @@ export function UserProvider({ children }) {
     } else {
       setDbUser(null);
     }
+    // getLevels();
   }, [isLoggedIn]);
 
   async function getDbUser() {
+    // console.log('getDbUser excuted');
     if (isLoggedIn) {
       const user = await db.collection('Users').doc(isLoggedIn.uid).get();
       const dbUser = user.data();
@@ -41,6 +44,7 @@ export function UserProvider({ children }) {
   }
 
   function getLevels() {
+    // console.log('getlevels excuted');
     const levelsRef = db.collection('Levels');
     const levels = {};
     levelsRef.get().then((snapshot) => {
@@ -69,6 +73,28 @@ export function UserProvider({ children }) {
     progressUpdate[`progress.${levelName}.${difficulty}`] = true;
     db.collection('Users').doc(isLoggedIn.uid).update(progressUpdate);
   }
+
+  const defineDifficulty = (currentLevelName) => {
+    if (
+      !dbUser.progress[currentLevelName].learn &&
+      !dbUser.progress[currentLevelName].practice &&
+      !dbUser.progress[currentLevelName].text
+    ) {
+      setDifficulty('learn');
+    } else if (
+      dbUser.progress[currentLevelName].learn &&
+      !dbUser.progress[currentLevelName].practice &&
+      !dbUser.progress[currentLevelName].text
+    ) {
+      setDifficulty('practice');
+    } else if (
+      dbUser.progress[currentLevelName].learn &&
+      dbUser.progress[currentLevelName].practice &&
+      !dbUser.progress[currentLevelName].text
+    ) {
+      setDifficulty('text');
+    }
+  };
   const value = {
     dbUser,
     setDbUser,
@@ -80,6 +106,9 @@ export function UserProvider({ children }) {
     updateDbUserPts,
     updateDbUserProgress,
     updateDbUserCp,
+    defineDifficulty,
+    setDifficulty,
+    difficulty,
   };
 
   return <UserContext.Provider value={value}>{children}</UserContext.Provider>;

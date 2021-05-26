@@ -5,9 +5,11 @@ import * as fp from 'fingerpose';
 import Webcam from 'react-webcam';
 import handSigns from '../handsigns';
 import { Typography } from '@material-ui/core';
-import { ThumbUp } from '@material-ui/icons';
+import { ThumbUp, Grade } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
 import { Redirect } from 'react-router-dom';
+
+let pointsMemory = {};
 
 function TrailApp() {
   const webcamRef = useRef(null);
@@ -16,11 +18,6 @@ function TrailApp() {
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [prompt, setPrompt] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
-
-  let pointsMemory = {};
-  if (letter != null && letter === prompt) {
-    pointsMemory[letter] = true;
-  }
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -94,34 +91,69 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     displayPrompt();
+    pointsMemory = {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (letter != null && letter === prompt) {
+    pointsMemory[letter] = true;
+  }
   const maxLevelPts = promptArr.length;
-  let totalPts = Object.keys(pointsMemory).length;
+  let totalPts = Object.keys(pointsMemory).length * 5;
+  let margin = totalPts < 10 ? 15 : 8;
+  console.log('margin', margin);
 
   return !gameEnd ? (
     <div className="App video-container">
       <header>
         <Webcam className="video" ref={webcamRef} />
       </header>
-
-      <div className="prompt-card">
-        <div>
-          <div>
-            {letter !== '' && letter === prompt ? (
-              <ThumbUp color="primary" style={{ fontSize: 100, float: 'center' }} />
-            ) : (
-              ''
-            )}
+      <div className="game-container">
+        <div id="points-container">
+          <div id="score">
+            <Typography
+              variant="h2"
+              style={{
+                fontWeight: 'bold',
+                color: 'white',
+                fontSize: 30,
+                textAlign: 'justify',
+                zIndex: 10,
+                marginLeft: margin,
+                marginTop: 10,
+              }}
+            >
+              {totalPts}
+            </Typography>
+          </div>
+          <div id="score-star">
+            <Grade style={{ fontSize: 100, fill: 'gold' }}></Grade>
           </div>
         </div>
-        <div className="prompt-box">
-          <div className="prompt-content">
-            <Typography id="gesture-guess" fontWeight="fontWeightBold">
-              Your GUESS: {letter}
-            </Typography>
-            <Typography variant="h2">Prompt: {prompt}</Typography>
+        <div className="prompt-card">
+          <div id="thumb-containter">
+            <div>
+              {letter !== '' && letter === prompt ? (
+                <Typography variant="h1" style={{ color: 'gold' }}>
+                  +5
+                </Typography>
+              ) : (
+                ''
+              )}
+            </div>
+            <div>
+              {letter !== '' && letter === prompt ? (
+                <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
+              ) : (
+                ''
+              )}
+            </div>
+          </div>
+          <div className="prompt-box">
+            <div className="prompt-content">
+              <Typography variant="h6">Your GUESS: {letter}</Typography>
+              <Typography variant="h2">Prompt: {prompt}</Typography>
+            </div>
           </div>
         </div>
       </div>
