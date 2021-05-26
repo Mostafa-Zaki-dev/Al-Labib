@@ -20,7 +20,7 @@ const Level = React.memo(({ dbUser, name, levelNum }) => {
   const n = levelNum - 2;
   let cp;
 
-  console.log('Level rendered');
+  // console.log('Level rendered');
   if (dbUser) {
     cp = dbUser.checkpoints;
     // console.log('cp >>', cp);

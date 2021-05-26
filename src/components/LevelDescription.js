@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
 
 export default function LevelDescription({ name, show }) {
-  const { dbUser, levels, setCurrentLevel } = useUser();
+  const { dbUser, levels, setCurrentLevel, defineDifficulty } = useUser();
   const history = useHistory();
   let levelsCompleted = 0;
 
@@ -14,8 +14,9 @@ export default function LevelDescription({ name, show }) {
     }
   }
 
-  function handleClick() {
-    setCurrentLevel(levels[name]);
+  async function handleClick() {
+    await setCurrentLevel(levels[name]);
+    await defineDifficulty(name);
     history.push('/app');
   }
 

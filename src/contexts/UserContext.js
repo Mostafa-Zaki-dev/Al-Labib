@@ -43,6 +43,7 @@ export function UserProvider({ children }) {
     }
   }
 
+  // Imediate invokede fn because levels is not changed
   function getLevels() {
     // console.log('getlevels excuted');
     const levelsRef = db.collection('Levels');
@@ -64,7 +65,14 @@ export function UserProvider({ children }) {
     db.collection('Users').doc(isLoggedIn.uid).update({ points: pts });
   }
 
-  function updateDbUserCp(cp) {
+  function updateDbUserCp() {
+    let cp = 0;
+    if (dbUser) {
+      let progress = dbUser.progress;
+      for (let level in progress) {
+        for (let key in progress[level]) if (progress[level][key] === true) cp++;
+      }
+    }
     db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
   }
 

@@ -8,7 +8,7 @@ const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 function Dashboard() {
   const { dbUser, getDbUser, getLevels } = useUser();
   // console.log('dbUser Dashboard', dbUser);
-  console.log('dashboard rendered >>');
+  // console.log('dashboard rendered >>');
 
   useEffect(() => {
     getDbUser();

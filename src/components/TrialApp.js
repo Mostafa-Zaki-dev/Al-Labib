@@ -98,10 +98,10 @@ function TrailApp() {
   if (letter != null && letter === prompt) {
     pointsMemory[letter] = true;
   }
-  const maxLevelPts = promptArr.length;
+  const maxLevelPts = promptArr.length * 5;
   let totalPts = Object.keys(pointsMemory).length * 5;
   let margin = totalPts < 10 ? 15 : 8;
-  console.log('margin', margin);
+  // console.log('margin', margin);
 
   return !gameEnd ? (
     <div className="App video-container">
