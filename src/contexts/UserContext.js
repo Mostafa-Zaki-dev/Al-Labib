@@ -73,6 +73,33 @@ export function UserProvider({ children }) {
         for (let key in progress[level]) if (progress[level][key] === true) cp++;
       }
     }
+    // let cp = {
+    //   'Level 1': 0,
+    //   'Level 2': 0,
+    //   'Level 3': 0,
+    //   'Level 4': 0,
+    //   'Level 5': 0,
+    //   'Level 6': 0,
+    //   'Level 7': 0,
+    //   'Level 8': 0,
+    //   'Level 9': 0,
+    //   total: 0,
+    // };
+    // if (dbUser) {
+    //   let progress = dbUser.progress;
+    //   for (let level in progress) {
+    //     if (!progress[level].learn && !progress[level].practice && !progress[level].text) {
+    //       cp[level] = 0;
+    //     } else if (progress[level].learn && !progress[level].practice && !progress[level].text) {
+    //       cp[level] = 1;
+    //     } else if (progress[level].learn && progress[level].practice && !progress[level].text) {
+    //       cp[level] = 2;
+    //     } else if (progress[level].learn && progress[level].practice && progress[level].text) {
+    //       cp[level] = 3;
+    //     }
+    //     cp.total += cp[level];
+    //   }
+    // }
     db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
   }
 
