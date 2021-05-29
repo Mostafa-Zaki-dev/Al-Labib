@@ -30,18 +30,7 @@ export function AuthProvider({ children }) {
             firstName: firstName,
             lastName: lastName,
             points: 0,
-            checkpoints: {
-              'Level 1': 0,
-              'Level 2': 0,
-              'Level 3': 0,
-              'Level 4': 0,
-              'Level 5': 0,
-              'Level 6': 0,
-              'Level 7': 0,
-              'Level 8': 0,
-              'Level 9': 0,
-              total: 0,
-            },
+            checkpoints: 0,
             progress: {
               'Level 1': {
                 learn: false,

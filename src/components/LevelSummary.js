@@ -22,22 +22,26 @@ export default function LevelSummary(props) {
 
   useEffect(() => {
     getDbUser();
+    // (async () => await getDbUser())();
     return () => (ReactStrictModeCompensateCounter = 0);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    return getDbUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  console.log('dbUser LevelSummary:: ', dbUser);
   if (dbUser) {
     ReactStrictModeCompensateCounter++;
     let dbPoints = dbUser.points;
-    console.log('dbPoints', dbPoints);
+    // console.log('dbPoints', dbPoints);
     let updatedPts = totalPts + dbPoints;
-    console.log('updatedPts', updatedPts);
+    // console.log('updatedPts', updatedPts);
     // To avoid updating points twice which cause multiplying user points by 2 each round
     if (ReactStrictModeCompensateCounter < 2) {
-      console.log('<<<<   excuted >>>');
+      // console.log('<<<<   excuted >>>');
       updateDbUserPts(updatedPts);
     }
-
     if (totalPts >= maxLevelPts) {
       updateDbUserProgress(currentLevel.name, difficulty);
       updateDbUserCp();

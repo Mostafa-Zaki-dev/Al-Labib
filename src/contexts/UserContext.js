@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
-import { db } from '../firebase-config';
-import { useAuth } from '../contexts/AuthContext';
+import { db, auth } from '../firebase-config';
+// import { useAuth } from '../contexts/AuthContext';
 
 const UserContext = React.createContext();
 
@@ -10,9 +10,9 @@ export function useUser() {
 
 export function UserProvider({ children }) {
   const [dbUser, setDbUser] = useState(null);
-  // const isLoggedIn = auth.currentUser;  // changed to currentUser from AuthContext to be rendered in Navbar
-  const { currentUser } = useAuth();
-  const isLoggedIn = currentUser;
+  const isLoggedIn = auth.currentUser; // changed to currentUser from AuthContext to be rendered in Navbar
+  // const { currentUser } = useAuth();
+  // const isLoggedIn = currentUser;
   const [levels, setLevels] = useState({});
   const [currentLevel, setCurrentLevel] = useState({});
   const [difficulty, setDifficulty] = useState(null);
@@ -31,6 +31,23 @@ export function UserProvider({ children }) {
     }
     // getLevels();
   }, [isLoggedIn]);
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     if (isLoggedIn) {
+  //       const userRef = db.collection('Users').doc(isLoggedIn.uid);
+  //       (() => {
+  //         userRef.get().then((user) => {
+  //           setDbUser(user.data());
+  //         });
+  //       })();
+  //     } else {
+  //       setDbUser(null);
+  //     }
+  //   };
+  //   return fetchData;
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   async function getDbUser() {
     // console.log('getDbUser excuted');
@@ -65,14 +82,41 @@ export function UserProvider({ children }) {
     db.collection('Users').doc(isLoggedIn.uid).update({ points: pts });
   }
 
-  function updateDbUserCp() {
+  // no need for the below code:
+
+  // async function updateLevelStars(levelName) {
+  //   let stars = 0;
+  //   // console.log('updateLevelStars excuted');
+  //   if (dbUser) {
+  //     // console.log('updateLevelStars if(dbUser) excuted');
+  //     // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+  //     // const dbUser = user.data();
+  //     // console.log('dbUser', dbUser);
+  //     let levelProgress = dbUser.progress[levelName];
+  //     for (let level in levelProgress) {
+  //       if (levelProgress[level] === true) stars++;
+  //     }
+  //   }
+  //   db.collection('Users')
+  //     .doc(isLoggedIn.uid)
+  //     .update({ [levelName]: stars });
+  // }
+
+  async function updateDbUserCp() {
     let cp = 0;
+    // console.log('updateDbUserCp excuted');
     if (dbUser) {
+      // console.log('updateDbUserCp if(dbUser) excuted');
+      // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+      // const dbUser = user.data();
       let progress = dbUser.progress;
       for (let level in progress) {
         for (let key in progress[level]) if (progress[level][key] === true) cp++;
       }
     }
+
+    // no need for the below code
+
     // let cp = {
     //   'Level 1': 0,
     //   'Level 2': 0,

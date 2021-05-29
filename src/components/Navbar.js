@@ -44,7 +44,7 @@ export default function Navbar() {
   const history = useHistory();
 
   useEffect(() => {
-    getDbUser();
+    // getDbUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   // console.log('dbUser >>>', dbUser);

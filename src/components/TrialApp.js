@@ -14,7 +14,7 @@ let pointsMemory = {};
 function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
-  const { currentLevel } = useUser();
+  const { currentLevel, getDbUser } = useUser();
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [prompt, setPrompt] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
@@ -91,6 +91,7 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     displayPrompt();
+    getDbUser();
     pointsMemory = {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -1,11 +1,17 @@
 import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
+import React, { useEffect } from 'react';
 
 export default function LevelDescription({ name, show }) {
-  const { dbUser, levels, setCurrentLevel, defineDifficulty } = useUser();
+  const { dbUser, levels, setCurrentLevel, defineDifficulty, getDbUser } = useUser();
   const history = useHistory();
   let levelsCompleted = 0;
+
+  useEffect(() => {
+    getDbUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (dbUser) {
     let progress = dbUser.progress[name];
