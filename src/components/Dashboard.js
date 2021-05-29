@@ -6,11 +6,10 @@ import React, { useEffect } from 'react';
 const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Dashboard() {
-  const { dbUser, getDbUser, getLevels, updateDbUserCp, updateLevelStars, currentLevel } =
-    useUser();
-  // console.log('dbUser Dashboard', dbUser);
+  const { dbUser, getDbUser, getLevels } = useUser();
+
   // console.log('dashboard rendered >>');
-  // console.log('dbUser Dashboard>>> ', dbUser);
+  console.log('dbUser Dashboard>>> ', dbUser);
   useEffect(() => {
     // updateDbUserCp();
     // updateLevelStars(currentLevel.name);

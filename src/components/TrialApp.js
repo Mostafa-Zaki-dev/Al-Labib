@@ -91,7 +91,7 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     displayPrompt();
-    getDbUser();
+    // getDbUser();
     pointsMemory = {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

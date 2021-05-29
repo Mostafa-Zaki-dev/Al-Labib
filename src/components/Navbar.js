@@ -43,11 +43,11 @@ export default function Navbar() {
   const { dbUser, getDbUser } = useUser();
   const history = useHistory();
 
-  useEffect(() => {
-    // getDbUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  // console.log('dbUser >>>', dbUser);
+  // useEffect(() => {
+  //   getDbUser();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  // console.log('dbUser Navbar   >>>', dbUser);
 
   return (
     <React.Fragment>

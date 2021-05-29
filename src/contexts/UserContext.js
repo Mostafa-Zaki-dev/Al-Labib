@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { db, auth } from '../firebase-config';
-// import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../contexts/AuthContext';
 
 const UserContext = React.createContext();
 
@@ -10,9 +10,9 @@ export function useUser() {
 
 export function UserProvider({ children }) {
   const [dbUser, setDbUser] = useState(null);
-  const isLoggedIn = auth.currentUser; // changed to currentUser from AuthContext to be rendered in Navbar
-  // const { currentUser } = useAuth();
-  // const isLoggedIn = currentUser;
+  // const isLoggedIn = auth.currentUser; // changed to currentUser from AuthContext to be rendered in Navbar
+  const { currentUser } = useAuth();
+  const isLoggedIn = currentUser;
   const [levels, setLevels] = useState({});
   const [currentLevel, setCurrentLevel] = useState({});
   const [difficulty, setDifficulty] = useState(null);
@@ -21,10 +21,15 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     if (isLoggedIn) {
+      console.log('useEffect useContext excuted');
       const userRef = db.collection('Users').doc(isLoggedIn.uid);
       (async () => {
         let user = await userRef.get();
-        setDbUser(user.data());
+        console.log('user.data() useEffect useContext >>', user.data());
+        if (user.data()) {
+          console.log('if (user.data() excuted useEffect');
+          setDbUser(user.data());
+        }
       })();
     } else {
       setDbUser(null);
@@ -50,11 +55,25 @@ export function UserProvider({ children }) {
   // }, []);
 
   async function getDbUser() {
-    // console.log('getDbUser excuted');
     if (isLoggedIn) {
+      console.log('getDbUser excuted');
       const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-      const dbUser = user.data();
-      setDbUser(dbUser);
+      console.log('user getDbUser', user);
+      /* 
+      the below approach is beacause while creating/updating a field in the user document, 
+      the firestore consider the document DO NOT exist untill the create/update async process is completed 
+      According to : https://stackoverflow.com/questions/48068581/firebase-doc-exists-but-doc-exists-returns-false
+      */
+      if (user.exists) {
+        const dbUser = user.data();
+        console.log('dbUser getDbUser >>', dbUser);
+        setDbUser(dbUser);
+      } else if (!user.exists) {
+        getDbUser();
+      }
+      // if (user.data()) {
+      //   console.log('if (user.data() excuted getDbUser');
+      // }
       // console.log('dbUser form getDbUser :', dbUser);
       return dbUser;
     }
@@ -102,18 +121,18 @@ export function UserProvider({ children }) {
   //     .update({ [levelName]: stars });
   // }
 
-  async function updateDbUserCp() {
-    let cp = 0;
-    // console.log('updateDbUserCp excuted');
-    if (dbUser) {
-      // console.log('updateDbUserCp if(dbUser) excuted');
-      // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-      // const dbUser = user.data();
-      let progress = dbUser.progress;
-      for (let level in progress) {
-        for (let key in progress[level]) if (progress[level][key] === true) cp++;
-      }
-    }
+  async function updateDbUserCp(cp) {
+    // let cp = 0;
+    // // console.log('updateDbUserCp excuted');
+    // if (dbUser) {
+    //   // console.log('updateDbUserCp if(dbUser) excuted');
+    //   // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+    //   // const dbUser = user.data();
+    //   let progress = dbUser.progress;
+    //   for (let level in progress) {
+    //     for (let key in progress[level]) if (progress[level][key] === true) cp++;
+    //   }
+    // }
 
     // no need for the below code
 

@@ -21,12 +21,13 @@ function Level({ name, levelNum }) {
   let cp;
   let stars;
   let levelsCompleted = 0;
-  useEffect(() => {
-    return getDbUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // useEffect(() => {
+  //   // return getDbUser();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   // console.log('Level rendered');
+  // console.log('dbUser Level   >>>', dbUser);
   if (dbUser) {
     let progress = dbUser.progress[name];
     for (let key in progress) {

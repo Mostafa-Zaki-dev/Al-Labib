@@ -8,11 +8,11 @@ export default function LevelDescription({ name, show }) {
   const history = useHistory();
   let levelsCompleted = 0;
 
-  useEffect(() => {
-    getDbUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+  // useEffect(() => {
+  //   getDbUser();
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
+  // console.log('dbUser LevelDescription   >>>', dbUser);
   if (dbUser) {
     let progress = dbUser.progress[name];
     for (let key in progress) {

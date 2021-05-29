@@ -21,8 +21,8 @@ export default function Routes() {
   return (
     <ThemeProvider theme={theme}>
       <Router>
-        <UserProvider>
-          <AuthProvider>
+        <AuthProvider>
+          <UserProvider>
             <Navbar />
             <div className={classes.offset} />
             <Switch>
@@ -33,8 +33,8 @@ export default function Routes() {
               <Route path="/app" component={TrailApp} />
               <Route pathh="/levelsummary" component={LevelSummary} />
             </Switch>
-          </AuthProvider>
-        </UserProvider>
+          </UserProvider>
+        </AuthProvider>
       </Router>
     </ThemeProvider>
   );
