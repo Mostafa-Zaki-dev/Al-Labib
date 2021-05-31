@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import {
   AppBar,
@@ -38,16 +38,9 @@ const useStyles = makeStyles({
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const classes = useStyles();
-  const nodeRef = useRef(null);
   const { signout, currentUser } = useAuth();
-  const { dbUser, getDbUser } = useUser();
+  const { dbUser } = useUser();
   const history = useHistory();
-
-  // useEffect(() => {
-  //   getDbUser();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  // console.log('dbUser Navbar   >>>', dbUser);
 
   return (
     <React.Fragment>
@@ -62,7 +55,7 @@ export default function Navbar() {
             onClose={() => setOpen(false)}
             onOpen={() => {}}
           >
-            <div className={classes.DrawerList} ref={nodeRef}>
+            <div className={classes.DrawerList}>
               <Box textAlign="center">
                 <Avatar className={classes.Avatar}>
                   <AvatarIcon color="secondary" fontSize="large" />

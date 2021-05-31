@@ -8,8 +8,13 @@ import { useUser } from '../contexts/UserContext';
 let ReactStrictModeCompensateCounter = 0;
 
 export default function LevelSummary(props) {
-  const { totalPts, maxLevelPts } = props.location.state;
   const history = useHistory();
+  // to avoid direct access of URL leading to no props value
+  if (props.location.state === undefined) {
+    history.push('/dashboard');
+    window.location.reload();
+  }
+  const { totalPts, maxLevelPts } = props.location.state;
   const {
     dbUser,
     getDbUser,
@@ -20,6 +25,11 @@ export default function LevelSummary(props) {
     updateDbUserCp,
   } = useUser();
 
+  // to avoid page reloading/refreshing leading to currentLevel={} -its initial state
+  if (currentLevel.name === undefined) {
+    history.push('/dashboard');
+    window.location.reload();
+  }
   useEffect(() => {
     getDbUser();
     return () => {

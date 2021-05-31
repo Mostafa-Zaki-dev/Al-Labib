@@ -96,6 +96,15 @@ function TrailApp() {
   let totalPts = Object.keys(pointsMemory).length * 5;
   let margin = totalPts < 10 ? 15 : 8;
 
+  //preventing LevelSummary page refreshing (reloading)
+
+  window.onbeforeunload = function () {
+    window.setTimeout(function () {
+      window.location = '/dashboard';
+    }, 0);
+    window.onbeforeunload = null; // necessary to prevent infinite loop, that kills your browser
+  };
+
   return !gameEnd ? (
     <div className="App video-container">
       <header>

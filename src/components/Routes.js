@@ -31,7 +31,7 @@ export default function Routes() {
               <Route path="/signin" component={SignIn} />
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/app" component={TrailApp} />
-              <Route pathh="/levelsummary" component={LevelSummary} />
+              <Route path="/levelsummary" component={LevelSummary} />
             </Switch>
           </UserProvider>
         </AuthProvider>
