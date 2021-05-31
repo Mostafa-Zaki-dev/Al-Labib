@@ -1,6 +1,6 @@
 import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
-import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
+import { Dialog, List, Button, Typography } from '@material-ui/core';
 
 export default function LevelDescription({ name, show }) {
   const { dbUser, levels, setCurrentLevel, defineDifficulty, setDifficulty } = useUser();
@@ -13,6 +13,12 @@ export default function LevelDescription({ name, show }) {
       if (progress[key] === true) levelsCompleted++;
     }
   }
+
+  // const handleButtonClick = (chosenLevel) => (e) => {
+  // 	e.preventDefault();
+  // 	setDifficulty(chosenLevel);
+  // 	handleClick(chosenLevel);
+  // };
 
   async function handleClick(selectedStar) {
     await setCurrentLevel(levels[name]);
@@ -33,11 +39,10 @@ export default function LevelDescription({ name, show }) {
       </Typography>
       <List align="center">
         <Typography variant="h4" style={{ color: 'gold', fontWeight: 'bold' }}>
-          Achieved Stars
+          Stars
         </Typography>
-        <br />
         <Typography
-          variant="h2"
+          variant="h1"
           color="primary"
           style={{ color: 'gold', fontWeight: 'bolder' }}
         >{` ${levelsCompleted} / 3`}</Typography>
@@ -47,7 +52,7 @@ export default function LevelDescription({ name, show }) {
           </Typography>
         )}
       </List>
-      <Button onClick={handleClick}>Begin</Button>
+      <Button onClick={() => handleClick()}>Begin</Button>
     </Dialog>
   ) : (
     <Dialog open={show}>

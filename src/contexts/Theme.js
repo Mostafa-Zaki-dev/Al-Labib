@@ -48,9 +48,10 @@ const theme = createMuiTheme({
       paper: {
         borderRadius: 20,
         opacity: '92%',
-        padding: '8%',
-        paddingTop: '5%',
-        paddingBottom: '5%',
+        padding: '6%',
+        paddingTop: '8%',
+        paddingBottom: '8%',
+        // backgroundColor: '#c6e0f5',
       },
     },
   },

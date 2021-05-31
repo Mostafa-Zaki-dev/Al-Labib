@@ -25,6 +25,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import theme from '../contexts/Theme';
 import { useAuth } from '../contexts/AuthContext';
 import { useUser } from '../contexts/UserContext';
+import Profile from './Profile';
 
 const useStyles = makeStyles({
   DrawerList: {
@@ -41,6 +42,7 @@ export default function Navbar() {
   const { signout, currentUser } = useAuth();
   const { dbUser } = useUser();
   const history = useHistory();
+  const [profileShow, setProfileShow] = useState(false);
 
   return (
     <React.Fragment>
@@ -68,24 +70,34 @@ export default function Navbar() {
               </Box>
               <Divider />
               <List>
-                <ListItem
-                  button
-                  onClick={() => {
-                    history.push('/dashboard');
-                    setOpen(false);
-                  }}
-                >
-                  <ListItemIcon>
-                    <DashboardIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Dashboard" />
-                </ListItem>
-                <ListItem button onClick={() => {}}>
-                  <ListItemIcon>
-                    <PersonIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Profile" />
-                </ListItem>
+                {currentUser && (
+                  <ListItem
+                    button
+                    onClick={() => {
+                      history.push('/dashboard');
+                      setOpen(false);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <DashboardIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Dashboard" />
+                  </ListItem>
+                )}
+                {currentUser && (
+                  <ListItem
+                    button
+                    onClick={() => {
+                      setProfileShow(!profileShow);
+                      setOpen(false);
+                    }}
+                  >
+                    <ListItemIcon>
+                      <PersonIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Profile" />
+                  </ListItem>
+                )}
                 <ListItem button onClick={() => {}}>
                   <ListItemIcon>
                     <InfoIcon />
@@ -105,22 +117,25 @@ export default function Navbar() {
               <br />
               <br />
               <Divider />
-              <ListItem
-                button
-                onClick={() => {
-                  setOpen(false);
-                  signout();
-                }}
-              >
-                <ListItemIcon>
-                  <ExitToAppIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sign Out" />
-              </ListItem>
+              {currentUser && (
+                <ListItem
+                  button
+                  onClick={() => {
+                    setOpen(false);
+                    signout();
+                  }}
+                >
+                  <ListItemIcon>
+                    <ExitToAppIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Sign Out" />
+                </ListItem>
+              )}
             </div>
           </SwipeableDrawer>
         </Toolbar>
       </AppBar>
+      <Profile profileShow={profileShow} setProfileShow={setProfileShow} />
     </React.Fragment>
   );
 }

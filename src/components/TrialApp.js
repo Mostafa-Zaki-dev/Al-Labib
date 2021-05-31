@@ -85,7 +85,7 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     displayPrompt();
-    pointsMemory = {};
+    return () => (pointsMemory = {});
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,0 +1,80 @@
+import React, { useEffect } from 'react';
+import { useUser } from '../contexts/UserContext';
+import { useAuth } from '../contexts/AuthContext';
+import { Dialog, DialogTitle, Typography, makeStyles } from '@material-ui/core';
+import { tada } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+
+const useStyles = makeStyles({
+  paper: {
+    backgroundColor: '#c6e0f5',
+  },
+});
+
+const Tada = styled.div`
+  animation: 900ms ${keyframes`${tada}`};
+`;
+
+export default function Profile({ profileShow, setProfileShow }) {
+  const { dbUser, getDbUser } = useUser();
+  const { currentUser } = useAuth();
+  const classes = useStyles();
+
+  useEffect(() => {
+    getDbUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleClickAway = () => {
+    setProfileShow(false);
+  };
+
+  let unlockedLevels = 0;
+  let cp = 0;
+  let points = 0;
+
+  if (dbUser) {
+    cp = dbUser.checkpoints;
+    points = dbUser.points;
+    if (cp < 2) unlockedLevels = 1;
+    if (cp > 1) unlockedLevels = Math.round(cp / 2);
+  }
+
+  return (
+    <>
+      <Dialog
+        classes={{ paper: classes.paper }}
+        open={profileShow}
+        onBackdropClick={handleClickAway}
+        closeAfterTransition={true}
+      >
+        <DialogTitle style={{ color: 'darkblue' }} align="center">
+          Hi, {dbUser && currentUser && dbUser.firstName}!
+        </DialogTitle>
+        <div className="center-modal">
+          <Typography variant="h2">STATS</Typography>
+          <Typography variant="h5">Unlocked Levels</Typography>
+          <Tada>
+            <Typography variant="h2" color="primary">
+              {`${unlockedLevels} / 9`}
+            </Typography>
+          </Tada>
+          <br />
+          <Typography variant="h5">Achieved Stars</Typography>
+          <Tada>
+            <Typography variant="h2" color="primary">
+              {`${cp} / 27`}
+            </Typography>
+          </Tada>
+          <br />
+          <Typography variant="h5">Total Points</Typography>
+          <Tada>
+            <Typography variant="h2" color="primary">
+              {points}
+            </Typography>
+          </Tada>
+        </div>
+      </Dialog>
+    </>
+  );
+}
