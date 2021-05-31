@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';
 import { useUser } from '../contexts/UserContext';
@@ -9,12 +9,6 @@ let ReactStrictModeCompensateCounter = 0;
 
 export default function LevelSummary(props) {
   const history = useHistory();
-  // to avoid direct access of URL leading to no props value
-  if (props.location.state === undefined) {
-    history.push('/dashboard');
-    window.location.reload();
-  }
-  const { totalPts, maxLevelPts } = props.location.state;
   const {
     dbUser,
     getDbUser,
@@ -25,11 +19,6 @@ export default function LevelSummary(props) {
     updateDbUserCp,
   } = useUser();
 
-  // to avoid page reloading/refreshing leading to currentLevel={} -its initial state
-  if (currentLevel.name === undefined) {
-    history.push('/dashboard');
-    window.location.reload();
-  }
   useEffect(() => {
     getDbUser();
     return () => {
@@ -38,6 +27,17 @@ export default function LevelSummary(props) {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // to avoid direct access of URL leading to no props value
+  if (props.location.state === undefined) {
+    return <Redirect to="/dashboard" />;
+  }
+  const { totalPts, maxLevelPts } = props.location.state;
+
+  // to avoid page reloading/refreshing leading to currentLevel={} -its initial state-
+  if (currentLevel.name === undefined) {
+    return <Redirect to="/dashboard" />;
+  }
 
   const gameResults = async () => {
     ReactStrictModeCompensateCounter++;
