@@ -47,7 +47,7 @@ const theme = createMuiTheme({
     MuiDialog: {
       paper: {
         borderRadius: 20,
-        opacity: '80%',
+        opacity: '92%',
         padding: '8%',
         paddingTop: '5%',
         paddingBottom: '5%',
