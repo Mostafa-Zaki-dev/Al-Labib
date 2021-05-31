@@ -27,22 +27,27 @@ export default function LevelSummary(props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   useEffect(() => {
-    // return getDbUser();
+    return getDbUser();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   console.log('dbUser LevelSummary:: ', dbUser);
+  // console.log('currentLevel', currentLevel);
 
-  let cp = 0;
   // console.log('updateDbUserCp excuted');
-  if (dbUser) {
-    // console.log('updateDbUserCp if(dbUser) excuted');
-    // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-    // const dbUser = user.data();
-    let progress = dbUser.progress;
-    for (let level in progress) {
-      for (let key in progress[level]) if (progress[level][key] === true) cp++;
-    }
-  }
+  // let cp = 0;
+  // if (dbUser) {
+  //   // console.log('updateDbUserCp if(dbUser) excuted');
+  //   // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+  //   // const dbUser = user.data();
+  //   let progress = dbUser.progress;
+  //   for (let level in progress) {
+  //     for (let key in progress[level]) {
+  //       if (progress[level][key] === true) {
+  //         cp++;
+  //       }
+  //     }
+  //   }
+  // }
 
   const gameResults = async () => {
     ReactStrictModeCompensateCounter++;
@@ -54,7 +59,7 @@ export default function LevelSummary(props) {
     await updateDbUserPts(updatedPts);
     if (totalPts >= maxLevelPts) {
       await updateDbUserProgress(currentLevel.name, difficulty);
-      await updateDbUserCp(cp);
+      await updateDbUserCp();
     }
   };
 

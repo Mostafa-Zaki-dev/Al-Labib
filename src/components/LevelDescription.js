@@ -21,6 +21,7 @@ export default function LevelDescription({ name, show }) {
   }
 
   async function handleClick() {
+    console.log('levels', levels);
     await setCurrentLevel(levels[name]);
     await defineDifficulty(name);
     history.push('/app');

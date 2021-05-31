@@ -21,13 +21,13 @@ export function UserProvider({ children }) {
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log('useEffect useContext excuted');
+      // console.log('useEffect useContext excuted');
       const userRef = db.collection('Users').doc(isLoggedIn.uid);
       (async () => {
         let user = await userRef.get();
-        console.log('user.data() useEffect useContext >>', user.data());
+        // console.log('user.data() useEffect useContext >>', user.data());
         if (user.data()) {
-          console.log('if (user.data() excuted useEffect');
+          // console.log('if (user.data() excuted useEffect');
           setDbUser(user.data());
         }
       })();
@@ -56,9 +56,7 @@ export function UserProvider({ children }) {
 
   async function getDbUser() {
     if (isLoggedIn) {
-      console.log('getDbUser excuted');
       const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-      console.log('user getDbUser', user);
       /* 
       the below approach is beacause while creating/updating a field in the user document, 
       the firestore consider the document DO NOT exist untill the create/update async process is completed 
@@ -66,7 +64,7 @@ export function UserProvider({ children }) {
       */
       if (user.exists) {
         const dbUser = user.data();
-        console.log('dbUser getDbUser >>', dbUser);
+        // console.log('dbUser getDbUser >>', dbUser);
         setDbUser(dbUser);
       } else if (!user.exists) {
         getDbUser();
@@ -101,72 +99,46 @@ export function UserProvider({ children }) {
     db.collection('Users').doc(isLoggedIn.uid).update({ points: pts });
   }
 
-  // no need for the below code:
-
-  // async function updateLevelStars(levelName) {
-  //   let stars = 0;
-  //   // console.log('updateLevelStars excuted');
-  //   if (dbUser) {
-  //     // console.log('updateLevelStars if(dbUser) excuted');
-  //     // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-  //     // const dbUser = user.data();
-  //     // console.log('dbUser', dbUser);
-  //     let levelProgress = dbUser.progress[levelName];
-  //     for (let level in levelProgress) {
-  //       if (levelProgress[level] === true) stars++;
-  //     }
-  //   }
-  //   db.collection('Users')
-  //     .doc(isLoggedIn.uid)
-  //     .update({ [levelName]: stars });
-  // }
-
-  async function updateDbUserCp(cp) {
+  async function updateDbUserCp() {
     // let cp = 0;
-    // // console.log('updateDbUserCp excuted');
-    // if (dbUser) {
-    //   // console.log('updateDbUserCp if(dbUser) excuted');
-    //   // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-    //   // const dbUser = user.data();
-    //   let progress = dbUser.progress;
-    //   for (let level in progress) {
-    //     for (let key in progress[level]) if (progress[level][key] === true) cp++;
-    //   }
-    // }
 
-    // no need for the below code
-
-    // let cp = {
-    //   'Level 1': 0,
-    //   'Level 2': 0,
-    //   'Level 3': 0,
-    //   'Level 4': 0,
-    //   'Level 5': 0,
-    //   'Level 6': 0,
-    //   'Level 7': 0,
-    //   'Level 8': 0,
-    //   'Level 9': 0,
-    //   total: 0,
-    // };
-    // if (dbUser) {
-    //   let progress = dbUser.progress;
-    //   for (let level in progress) {
-    //     if (!progress[level].learn && !progress[level].practice && !progress[level].text) {
-    //       cp[level] = 0;
-    //     } else if (progress[level].learn && !progress[level].practice && !progress[level].text) {
-    //       cp[level] = 1;
-    //     } else if (progress[level].learn && progress[level].practice && !progress[level].text) {
-    //       cp[level] = 2;
-    //     } else if (progress[level].learn && progress[level].practice && progress[level].text) {
-    //       cp[level] = 3;
+    // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+    // const dbUser = user.data();
+    // let progress = dbUser.progress;
+    // for (let level in progress) {
+    //   for (let key in progress[level]) {
+    //     if (progress[level][key] === true) {
+    //       cp++;
     //     }
-    //     cp.total += cp[level];
     //   }
     // }
-    db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
+    const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+    if (user.exists) {
+      const dbUser = user.data();
+      let progress = dbUser.progress;
+      let cp = 0;
+      for (let level in progress) {
+        // console.log('level:>>', level);
+        // the below if is to avoid the updateDbUserProgress Error
+        if (level !== 'undefined') {
+          for (let key in progress[level]) {
+            if (progress[level][key] === true) {
+              cp++;
+              // console.log('cp in loop: >>', cp);
+            }
+          }
+        }
+      }
+      // console.log('cp : >>', cp);
+      db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
+    } else if (!user.exists) {
+      updateDbUserCp();
+    }
   }
 
   function updateDbUserProgress(levelName, difficulty) {
+    // when LevelSummary is refreshed levelName is undefined as currentLevel state is back to the intial state useState({})
+    // console.log('levelName', levelName);
     let progressUpdate = {};
     progressUpdate[`progress.${levelName}.${difficulty}`] = true;
     db.collection('Users').doc(isLoggedIn.uid).update(progressUpdate);
