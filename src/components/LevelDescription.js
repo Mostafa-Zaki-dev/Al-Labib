@@ -1,18 +1,12 @@
 import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Dialog, List, ListItem, ListItemText, Button, Typography } from '@material-ui/core';
-import React, { useEffect } from 'react';
 
 export default function LevelDescription({ name, show }) {
-  const { dbUser, levels, setCurrentLevel, defineDifficulty, getDbUser } = useUser();
+  const { dbUser, levels, setCurrentLevel, defineDifficulty } = useUser();
   const history = useHistory();
   let levelsCompleted = 0;
 
-  // useEffect(() => {
-  //   getDbUser();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-  // console.log('dbUser LevelDescription   >>>', dbUser);
   if (dbUser) {
     let progress = dbUser.progress[name];
     for (let key in progress) {
@@ -21,7 +15,6 @@ export default function LevelDescription({ name, show }) {
   }
 
   async function handleClick() {
-    console.log('levels', levels);
     await setCurrentLevel(levels[name]);
     await defineDifficulty(name);
     history.push('/app');

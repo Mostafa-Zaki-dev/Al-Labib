@@ -8,11 +8,7 @@ const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 function Dashboard() {
   const { dbUser, getDbUser, getLevels } = useUser();
 
-  // console.log('dashboard rendered >>');
-  console.log('dbUser Dashboard>>> ', dbUser);
   useEffect(() => {
-    // updateDbUserCp();
-    // updateLevelStars(currentLevel.name);
     getDbUser();
     getLevels();
     // eslint-disable-next-line react-hooks/exhaustive-deps

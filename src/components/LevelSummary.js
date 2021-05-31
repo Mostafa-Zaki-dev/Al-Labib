@@ -22,40 +22,17 @@ export default function LevelSummary(props) {
 
   useEffect(() => {
     getDbUser();
-    // (async () => await getDbUser())();
-    return () => (ReactStrictModeCompensateCounter = 0);
+    return () => {
+      ReactStrictModeCompensateCounter = 0;
+      getDbUser();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  useEffect(() => {
-    return getDbUser();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  console.log('dbUser LevelSummary:: ', dbUser);
-  // console.log('currentLevel', currentLevel);
-
-  // console.log('updateDbUserCp excuted');
-  // let cp = 0;
-  // if (dbUser) {
-  //   // console.log('updateDbUserCp if(dbUser) excuted');
-  //   // const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-  //   // const dbUser = user.data();
-  //   let progress = dbUser.progress;
-  //   for (let level in progress) {
-  //     for (let key in progress[level]) {
-  //       if (progress[level][key] === true) {
-  //         cp++;
-  //       }
-  //     }
-  //   }
-  // }
 
   const gameResults = async () => {
     ReactStrictModeCompensateCounter++;
     let dbPoints = dbUser.points;
-    // console.log('dbPoints', dbPoints);
     let updatedPts = totalPts + dbPoints;
-    // console.log('updatedPts', updatedPts);
-    // To avoid updating points twice which cause multiplying user points by 2 each round
     await updateDbUserPts(updatedPts);
     if (totalPts >= maxLevelPts) {
       await updateDbUserProgress(currentLevel.name, difficulty);
@@ -63,11 +40,9 @@ export default function LevelSummary(props) {
     }
   };
 
+  // To avoid updating points twice which cause multiplying user points by 2 each round
   if (ReactStrictModeCompensateCounter < 2) {
-    // console.log('<<<<   excuted >>>');
     dbUser && gameResults();
-    // getDbUser();
-    // getDbUser();
   }
 
   return (

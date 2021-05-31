@@ -14,7 +14,7 @@ let pointsMemory = {};
 function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
-  const { currentLevel, getDbUser } = useUser();
+  const { currentLevel } = useUser();
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [prompt, setPrompt] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
@@ -53,7 +53,6 @@ function TrailApp() {
       // Make Detections
 
       const hand = await net.estimateHands(video);
-      // console.log('hand detection:  ', hand);
 
       // setting up Gesture Estimator
 
@@ -62,15 +61,10 @@ function TrailApp() {
           currentLevel.detect.map((handSign) => handSigns[handSign])
         );
         const gesture = await GE.estimate(hand[0].landmarks, 7.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        // console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
-          // console.log('gesture.gestures >>>>', gesture.gestures);
-
           const confidenceArr = gesture.gestures.map((prediction) => prediction.confidence);
           const maxConfidenceIdx = confidenceArr.indexOf(Math.max(...confidenceArr));
-          // console.log('maxConfidenceIdx >>>', maxConfidenceIdx);
-          // console.log('name of maxConfidence  >>',  gesture.gestures[maxConfidenceIdx].name);
           setLetter(gesture.gestures[maxConfidenceIdx].name);
         }
       }
@@ -91,7 +85,6 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     displayPrompt();
-    // getDbUser();
     pointsMemory = {};
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -102,7 +95,6 @@ function TrailApp() {
   const maxLevelPts = promptArr.length * 5;
   let totalPts = Object.keys(pointsMemory).length * 5;
   let margin = totalPts < 10 ? 15 : 8;
-  // console.log('margin', margin);
 
   return !gameEnd ? (
     <div className="App video-container">

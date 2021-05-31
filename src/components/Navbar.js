@@ -79,7 +79,6 @@ export default function Navbar() {
                   button
                   onClick={() => {
                     history.push('/dashboard');
-                    window.location.reload();
                     setOpen(false);
                   }}
                 >
