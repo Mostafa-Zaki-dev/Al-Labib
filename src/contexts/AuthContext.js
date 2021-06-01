@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { auth, db } from '../firebase-config';
 import { useHistory } from 'react-router-dom';
+import firebase from 'firebase/app';
 
 // Create Authentication context
 const AuthContext = React.createContext();
@@ -107,6 +108,12 @@ export function AuthProvider({ children }) {
     return auth.sendPasswordResetEmail(email);
   }
 
+  // used for essential user data update (like email and password)
+  function reAuthenticate(password) {
+    const credentials = firebase.auth.EmailAuthProvider.credential(currentUser.email, password);
+    return currentUser.reauthenticateWithCredential(credentials);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -125,6 +132,7 @@ export function AuthProvider({ children }) {
     updateUserEmail,
     updateUserPassword,
     resetPassword,
+    reAuthenticate,
   };
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }
