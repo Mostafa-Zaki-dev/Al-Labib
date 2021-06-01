@@ -11,6 +11,7 @@ import Navbar from './Navbar';
 import Dashboard from './Dashboard';
 import TrailApp from './TrialApp';
 import LevelSummary from './LevelSummary';
+import UpdateProfile from './UpdateProfile';
 
 const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
@@ -32,6 +33,7 @@ export default function Routes() {
               <Route path="/dashboard" component={Dashboard} />
               <Route path="/app" component={TrailApp} />
               <Route path="/levelsummary" component={LevelSummary} />
+              <Route path="/updateprofile" component={UpdateProfile} />
             </Switch>
           </UserProvider>
         </AuthProvider>

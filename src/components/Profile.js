@@ -1,9 +1,21 @@
 import React, { useEffect } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { useAuth } from '../contexts/AuthContext';
-import { Dialog, DialogTitle, Typography, makeStyles } from '@material-ui/core';
+import {
+  Dialog,
+  DialogTitle,
+  Typography,
+  makeStyles,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  Avatar,
+} from '@material-ui/core';
 import { tada } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
+import PersonOutlineIcon from '@material-ui/icons/PersonOutline';
+import { useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles({
   paper: {
@@ -19,6 +31,7 @@ export default function Profile({ profileShow, setProfileShow }) {
   const { dbUser, getDbUser } = useUser();
   const { currentUser } = useAuth();
   const classes = useStyles();
+  const history = useHistory();
 
   useEffect(() => {
     getDbUser();
@@ -74,6 +87,23 @@ export default function Profile({ profileShow, setProfileShow }) {
             </Typography>
           </Tada>
         </div>
+        <List>
+          <ListItem
+            align="center"
+            button
+            onClick={() => {
+              setProfileShow(false);
+              history.push('/updateprofile');
+            }}
+          >
+            <ListItemAvatar style={{ marginLeft: 50 }}>
+              <Avatar>
+                <PersonOutlineIcon color="secondary" />
+              </Avatar>
+            </ListItemAvatar>
+            <ListItemText primary="Edit Account" />
+          </ListItem>
+        </List>
       </Dialog>
     </>
   );

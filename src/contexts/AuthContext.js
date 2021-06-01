@@ -21,71 +21,66 @@ export function AuthProvider({ children }) {
 
   async function signup(email, password, firstName, lastName) {
     // the below function returns a promise
-    return auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(() => {
-        db.collection('Users')
-          .doc(auth.currentUser.uid)
-          .set({
-            firstName: firstName,
-            lastName: lastName,
-            points: 0,
-            checkpoints: 0,
-            progress: {
-              'Level 1': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 2': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 3': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 4': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 5': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 6': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 7': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 8': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
-              'Level 9': {
-                learn: false,
-                practice: false,
-                text: false,
-              },
+    return auth.createUserWithEmailAndPassword(email, password).then(() => {
+      db.collection('Users')
+        .doc(auth.currentUser.uid)
+        .set({
+          firstName: firstName,
+          lastName: lastName,
+          points: 0,
+          checkpoints: 0,
+          progress: {
+            'Level 1': {
+              learn: false,
+              practice: false,
+              text: false,
             },
-          })
-          .catch((error) => {
-            console.log('Something went wrong with adding user to firestore:', error);
-          });
-      })
-      .catch((error) => {
-        console.log('Something went wrong with sign up:', error);
-      });
+            'Level 2': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 3': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 4': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 5': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 6': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 7': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 8': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+            'Level 9': {
+              learn: false,
+              practice: false,
+              text: false,
+            },
+          },
+        })
+        .catch((error) => {
+          console.log('Something went wrong with adding user to firestore:', error);
+        });
+    });
   }
 
   async function signout() {
@@ -93,13 +88,32 @@ export function AuthProvider({ children }) {
     return auth.signOut();
   }
 
+  function updateUserName(firstName, lastName) {
+    return db.collection('Users').doc(currentUser.uid).update({
+      firstName,
+      lastName,
+    });
+  }
+
+  function updateUserEmail(email) {
+    return currentUser.updateEmail(email);
+  }
+
+  function updateUserPassword(password) {
+    return currentUser.updatePassword(password);
+  }
+
+  function resetPassword(email) {
+    return auth.sendPasswordResetEmail(email);
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      // console.log('authChanged user >>>', user);
       setCurrentUser(user);
       setLoading(false);
     });
-    return unsubscribe; //not necessary but will leave it for now
+    // the below is for stop event listener for cleaning up when component unmount
+    return unsubscribe;
   }, []);
 
   const value = {
@@ -107,6 +121,10 @@ export function AuthProvider({ children }) {
     signup,
     signin,
     signout,
+    updateUserName,
+    updateUserEmail,
+    updateUserPassword,
+    resetPassword,
   };
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }

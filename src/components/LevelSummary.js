@@ -18,7 +18,7 @@ export default function LevelSummary(props) {
     difficulty,
     updateDbUserCp,
   } = useUser();
-  console.log('difficulty', difficulty);
+
   useEffect(() => {
     getDbUser();
     return () => {
