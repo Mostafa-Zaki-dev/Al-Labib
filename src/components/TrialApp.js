@@ -7,17 +7,23 @@ import handSigns from '../handsigns';
 import { Typography } from '@material-ui/core';
 import { ThumbUp, Grade } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
-import { Redirect } from 'react-router-dom';
+import { Prompt, Redirect } from 'react-router-dom';
 
 let pointsMemory = {};
 
 function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
-  const { currentLevel } = useUser();
+  const { currentLevel, difficulty } = useUser();
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
+  const [pictureArr, setPictureArr] = useState(currentLevel.pictureArr);
   const [prompt, setPrompt] = useState('');
+  const [picture, setPicture] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
+  const [wave, setWave] = useState(false);
+
+  // console.log('App rendered');
+  // console.log('prompt: >>', prompt);
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -57,6 +63,11 @@ function TrailApp() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
+        if (difficulty === 'learn') {
+          if (!wave) {
+            setWave(true);
+          }
+        }
         const GE = new fp.GestureEstimator(
           currentLevel.detect.map((handSign) => handSigns[handSign])
         );
@@ -74,7 +85,15 @@ function TrailApp() {
   const displayPrompt = () => {
     let i = 0;
     const interval = setInterval(() => {
-      setPrompt(promptArr[i++]);
+      if (difficulty === 'learn') {
+        if (wave) {
+          console.log('if(wave) >>> excuted');
+          setPrompt(promptArr[i]);
+          setPicture(pictureArr[i++]);
+        }
+      } else if (difficulty === 'practice' || difficulty === 'text') {
+        setPrompt(promptArr[i++]);
+      }
       if (i > promptArr.length) {
         clearInterval(interval);
         setGameEnd(true);
@@ -83,9 +102,16 @@ function TrailApp() {
   };
 
   useEffect(() => {
-    runHandpose();
     displayPrompt();
-    return () => (pointsMemory = {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wave]);
+
+  useEffect(() => {
+    runHandpose();
+    return () => {
+      pointsMemory = {};
+      setWave(false);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -152,10 +178,36 @@ function TrailApp() {
             </div>
           </div>
           <div className="prompt-box">
-            <div className="prompt-content">
-              <Typography variant="h6">Your GUESS: {letter}</Typography>
-              <Typography variant="h2">Prompt: {prompt}</Typography>
-            </div>
+            {difficulty !== 'learn' ? (
+              <div className="prompt-content">
+                <Typography variant="h6" color="secondary">
+                  Detected: {letter}
+                </Typography>
+                <Typography variant="h4" color="primary">
+                  Hand sign for: {prompt}
+                </Typography>
+              </div>
+            ) : (
+              <div
+                className="prompt-content"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'row',
+                  justifyContent: 'center',
+                  alignContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                {!wave ? (
+                  <Typography variant="h5"> Wave your hand to start</Typography>
+                ) : (
+                  <>
+                    <Typography variant="h2">{prompt}</Typography>
+                    <img id="img-learn" src={picture} alt={prompt} style={{ marginLeft: 20 }} />
+                  </>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

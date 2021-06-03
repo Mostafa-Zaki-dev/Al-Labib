@@ -60,6 +60,7 @@ export function UserProvider({ children }) {
           detect: level.detect,
           promptArr: level.promptArr,
           name: level.name,
+          pictureArr: level.pictureArr,
         };
       });
       setLevels(levels);

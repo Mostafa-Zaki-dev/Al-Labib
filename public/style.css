@@ -155,3 +155,8 @@ body {
   margin-right: 20;
   position: relative;
 }
+
+#img-learn {
+  height: 110px;
+  border-radius: 50%;
+}
