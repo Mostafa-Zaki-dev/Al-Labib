@@ -1,6 +1,6 @@
 import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
-import { Dialog, List, Button, Typography } from '@material-ui/core';
+import { Dialog, List, Button, Typography, Grow } from '@material-ui/core';
 
 export default function LevelDescription({ name, show }) {
   const { dbUser, levels, setCurrentLevel, defineDifficulty, setDifficulty } = useUser();
@@ -33,7 +33,7 @@ export default function LevelDescription({ name, show }) {
   }
 
   return levelsCompleted !== 3 ? (
-    <Dialog open={show}>
+    <Dialog open={show} TransitionComponent={Grow} transitionDuration={{ enter: 600, exit: 200 }}>
       <Typography variant="h3" style={{ fontWeight: 'bold' }} color="primary" align="center">
         {name}
       </Typography>
@@ -55,7 +55,7 @@ export default function LevelDescription({ name, show }) {
       <Button onClick={() => handleClick()}>Begin</Button>
     </Dialog>
   ) : (
-    <Dialog open={show}>
+    <Dialog open={show} TransitionComponent={Grow} transitionDuration={{ enter: 600, exit: 200 }}>
       <Typography variant="h3" style={{ fontWeight: 'bold' }} color="primary" align="center">
         {name}
       </Typography>

@@ -93,7 +93,6 @@ function TrailApp() {
     const interval = setInterval(() => {
       if (difficulty === 'learn') {
         if (wave) {
-          console.log('if(wave) >>> excuted');
           setPicture(pictureArr[i]);
           setPrompt(promptArr[i++]);
         }
@@ -167,7 +166,7 @@ function TrailApp() {
         <div className="prompt-card">
           <div id="thumb-containter">
             <div>
-              {letter !== '' && letter === prompt ? (
+              {letter != null && letter === prompt ? (
                 <BounceUp>
                   <Typography variant="h1" style={{ color: 'gold' }}>
                     +5
@@ -178,7 +177,7 @@ function TrailApp() {
               )}
             </div>
             <div>
-              {letter !== '' && letter === prompt ? (
+              {letter != null && letter === prompt ? (
                 <BounceUp>
                   <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
                 </BounceUp>

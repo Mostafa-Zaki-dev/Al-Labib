@@ -11,6 +11,7 @@ import {
   ListItemAvatar,
   ListItemText,
   Avatar,
+  Grow,
 } from '@material-ui/core';
 import { tada } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
@@ -60,6 +61,8 @@ export default function Profile({ profileShow, setProfileShow }) {
         open={profileShow}
         onBackdropClick={handleClickAway}
         closeAfterTransition={true}
+        TransitionComponent={Grow}
+        transitionDuration={{ enter: 500, exit: 200 }}
       >
         <DialogTitle style={{ color: 'darkblue' }} align="center">
           Hi, {dbUser && currentUser && dbUser.firstName}!
