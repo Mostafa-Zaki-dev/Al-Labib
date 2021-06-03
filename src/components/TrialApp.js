@@ -7,7 +7,13 @@ import handSigns from '../handsigns';
 import { Typography } from '@material-ui/core';
 import { ThumbUp, Grade } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
-import { Prompt, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
+import { bounceInUp } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+
+const BounceUp = styled.div`
+  animation: 1s ${keyframes`${bounceInUp}`};
+`;
 
 let pointsMemory = {};
 
@@ -88,8 +94,8 @@ function TrailApp() {
       if (difficulty === 'learn') {
         if (wave) {
           console.log('if(wave) >>> excuted');
-          setPrompt(promptArr[i]);
-          setPicture(pictureArr[i++]);
+          setPicture(pictureArr[i]);
+          setPrompt(promptArr[i++]);
         }
       } else if (difficulty === 'practice' || difficulty === 'text') {
         setPrompt(promptArr[i++]);
@@ -162,16 +168,20 @@ function TrailApp() {
           <div id="thumb-containter">
             <div>
               {letter !== '' && letter === prompt ? (
-                <Typography variant="h1" style={{ color: 'gold' }}>
-                  +5
-                </Typography>
+                <BounceUp>
+                  <Typography variant="h1" style={{ color: 'gold' }}>
+                    +5
+                  </Typography>
+                </BounceUp>
               ) : (
                 ''
               )}
             </div>
             <div>
               {letter !== '' && letter === prompt ? (
-                <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
+                <BounceUp>
+                  <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
+                </BounceUp>
               ) : (
                 ''
               )}
@@ -196,10 +206,17 @@ function TrailApp() {
                   justifyContent: 'center',
                   alignContent: 'center',
                   alignItems: 'center',
+                  flexWrap: 'wrap',
                 }}
               >
                 {!wave ? (
-                  <Typography variant="h5"> Wave your hand to start</Typography>
+                  <>
+                    <Typography variant="h5" style={{ fontWeight: 'bold', justifyItems: 'center' }}>
+                      Match the signs and learn
+                    </Typography>
+                    <div className="break" />
+                    <Typography variant="h6">-Wave your hand to start-</Typography>
+                  </>
                 ) : (
                   <>
                     <Typography variant="h2">{prompt}</Typography>
