@@ -51,7 +51,14 @@ export default function Profile({ profileShow, setProfileShow }) {
     cp = dbUser.checkpoints;
     points = dbUser.points;
     if (cp < 2) unlockedLevels = 1;
-    if (cp > 1) unlockedLevels = Math.round(cp / 2);
+    if (2 <= cp && cp < 5) unlockedLevels = 2;
+    if (5 <= cp && cp < 8) unlockedLevels = 3;
+    if (8 <= cp && cp < 11) unlockedLevels = 4;
+    if (11 <= cp && cp < 14) unlockedLevels = 5;
+    if (14 <= cp && cp < 17) unlockedLevels = 6;
+    if (17 <= cp && cp < 20) unlockedLevels = 7;
+    if (20 <= cp && cp < 23) unlockedLevels = 8;
+    if (23 <= cp) unlockedLevels = 9; // will change if we added the tenth level
   }
 
   return (

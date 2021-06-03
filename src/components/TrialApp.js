@@ -16,6 +16,7 @@ const BounceUp = styled.div`
 `;
 
 let pointsMemory = {};
+let thumb = false;
 
 function TrailApp() {
   const webcamRef = useRef(null);
@@ -95,12 +96,15 @@ function TrailApp() {
         if (wave) {
           setPicture(pictureArr[i]);
           setPrompt(promptArr[i++]);
+          thumb = false;
         }
       } else if (difficulty === 'practice' || difficulty === 'text') {
         setPrompt(promptArr[i++]);
+        thumb = false;
       }
       if (i > promptArr.length) {
         clearInterval(interval);
+        thumb = false;
         setGameEnd(true);
       }
     }, 5000);
@@ -122,6 +126,7 @@ function TrailApp() {
 
   if (letter != null && letter === prompt) {
     pointsMemory[letter] = true;
+    thumb = true;
   }
   const maxLevelPts = promptArr.length * 5;
   let totalPts = Object.keys(pointsMemory).length * 5;
@@ -166,7 +171,7 @@ function TrailApp() {
         <div className="prompt-card">
           <div id="thumb-containter">
             <div>
-              {letter != null && letter === prompt ? (
+              {thumb ? (
                 <BounceUp>
                   <Typography variant="h1" style={{ color: 'gold' }}>
                     +5
@@ -177,7 +182,7 @@ function TrailApp() {
               )}
             </div>
             <div>
-              {letter != null && letter === prompt ? (
+              {thumb ? (
                 <BounceUp>
                   <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
                 </BounceUp>
