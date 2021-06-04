@@ -16,7 +16,6 @@ const BounceUp = styled.div`
 `;
 
 let pointsMemory = {};
-let thumb = false;
 
 function TrailApp() {
   const webcamRef = useRef(null);
@@ -24,7 +23,7 @@ function TrailApp() {
   const { currentLevel, difficulty } = useUser();
   const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
   const [pictureArr, setPictureArr] = useState(currentLevel.pictureArr);
-  const [prompt, setPrompt] = useState('');
+  const [prompt, setPrompt] = useState(null);
   const [picture, setPicture] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
   const [wave, setWave] = useState(false);
@@ -35,10 +34,11 @@ function TrailApp() {
   const runHandpose = async () => {
     const net = await handpose.load();
     console.log('Handpose model loaded.');
+
     //  Loop and detect hands
     setInterval(() => {
       detect(net);
-    }, 10);
+    }, 500);
   };
 
   const detect = async (net) => {
@@ -88,6 +88,7 @@ function TrailApp() {
       }
     }
   };
+
   //display the prompt every 5 seconds
   const displayPrompt = () => {
     let i = 0;
@@ -96,15 +97,12 @@ function TrailApp() {
         if (wave) {
           setPicture(pictureArr[i]);
           setPrompt(promptArr[i++]);
-          thumb = false;
         }
       } else if (difficulty === 'practice' || difficulty === 'text') {
         setPrompt(promptArr[i++]);
-        thumb = false;
       }
       if (i > promptArr.length) {
         clearInterval(interval);
-        thumb = false;
         setGameEnd(true);
       }
     }, 5000);
@@ -126,11 +124,14 @@ function TrailApp() {
 
   if (letter != null && letter === prompt) {
     pointsMemory[letter] = true;
-    thumb = true;
   }
+
   const maxLevelPts = promptArr.length * 5;
   let totalPts = Object.keys(pointsMemory).length * 5;
   let margin = totalPts < 10 ? 15 : 8;
+
+  // The below in order to make the +5Thumb appear only once preventing fluctuation
+  let thumb = pointsMemory[prompt];
 
   //preventing LevelSummary page refreshing (reloading)
 
@@ -223,6 +224,8 @@ function TrailApp() {
                   </>
                 ) : (
                   <>
+                    <Typography variant="h6">Wait for the next sign</Typography>
+                    <div className="break" />
                     <Typography variant="h2">{prompt}</Typography>
                     <img id="img-learn" src={picture} alt={prompt} style={{ marginLeft: 20 }} />
                   </>

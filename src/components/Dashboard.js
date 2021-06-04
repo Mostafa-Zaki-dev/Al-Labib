@@ -6,13 +6,14 @@ import React, { useEffect } from 'react';
 const levels = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 function Dashboard() {
-  const { dbUser, getDbUser, getLevels } = useUser();
+  const { dbUser, getDbUser, getLevels, updateDbUserCp } = useUser();
 
   useEffect(() => {
+    updateDbUserCp();
     getDbUser();
     getLevels();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dbUser]);
 
   return (
     <Container className="centerme" style={{ marginTop: 20 }}>
