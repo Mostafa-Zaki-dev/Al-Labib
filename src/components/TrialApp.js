@@ -17,6 +17,14 @@ const BounceUp = styled.div`
 
 let pointsMemory = {};
 
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
 function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
@@ -30,6 +38,15 @@ function TrailApp() {
 
   // console.log('App rendered');
   // console.log('prompt: >>', prompt);
+
+  const notLearning = () => {
+    if (difficulty === 'practice') {
+      setPromptArr(shuffle(promptArr));
+    }
+    if (difficulty === 'text') {
+      setPromptArr(shuffle(promptArr));
+    }
+  };
 
   const runHandpose = async () => {
     const net = await handpose.load();
@@ -115,6 +132,7 @@ function TrailApp() {
 
   useEffect(() => {
     runHandpose();
+    notLearning();
     return () => {
       pointsMemory = {};
       setWave(false);
