@@ -24,11 +24,23 @@ export default function LevelDescription({ name, show }) {
     await setCurrentLevel(levels[name]);
     if (selectedStar !== undefined) {
       await setDifficulty(selectedStar);
-      history.push('/app');
-      return;
+      if (selectedStar === 'text') {
+        history.push('/gameText');
+        return;
+      } else {
+        history.push('/app');
+      }
     } else {
       await defineDifficulty(name);
-      history.push('/app');
+      if (
+        dbUser.progress[name].learn &&
+        dbUser.progress[name].practice &&
+        !dbUser.progress[name].text
+      ) {
+        history.push('/gameText');
+      } else {
+        history.push('/app');
+      }
     }
   }
 

@@ -12,6 +12,7 @@ import Dashboard from './Dashboard';
 import TrailApp from './TrialApp';
 import LevelSummary from './LevelSummary';
 import UpdateProfile from './UpdateProfile';
+import GameText from './GameText';
 
 const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
@@ -31,6 +32,7 @@ export default function Routes() {
               <Route path="/signup" component={SignUp} />
               <Route path="/signin" component={SignIn} />
               <Route path="/dashboard" component={Dashboard} />
+              <Route path="/gameText" component={GameText} />
               <Route path="/app" component={TrailApp} />
               <Route path="/levelsummary" component={LevelSummary} />
               <Route path="/updateprofile" component={UpdateProfile} />
