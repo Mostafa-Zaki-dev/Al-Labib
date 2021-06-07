@@ -30,33 +30,9 @@ function GameText() {
   }));
   const [textPromptArr, setTextPromptArr] = useState(shuffle(combinedPromptArr));
   const [textPrompt, setTextPrompt] = useState(textPromptArr[0]);
-  // const [textPromptIdx, setTextPromptIdx] = useState(0);
   const [thumb, setThumb] = useState(false);
   const [gameEnd, setGameEnd] = useState(false);
   const userAnswerRef = useRef();
-
-  // const [letter, setLetter] = useState(null);
-  // const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
-  // const [pictureArr, setPictureArr] = useState(currentLevel.pictureArr);
-
-  // const notLearning = () => {
-  //   setTextPromptArr(shuffle(combinedPromptArr));
-  //   setTextPrompt()
-  // };
-
-  console.log('textPromptArr', textPromptArr);
-  console.log('textPrompt', textPrompt);
-  //display the prompt every 5 seconds
-  // const displayPrompt = () => {
-  //   let i = 0;
-  //   const interval = setInterval(() => {
-  //     setTextPrompt(textPromptArr[i++]);
-  //     if (i > textPromptArr.length) {
-  //       clearInterval(interval);
-  //       setGameEnd(true);
-  //     }
-  //   }, 5000);
-  // };
 
   function checkAnswer(answer) {
     if (answer === textPrompt.letter) {
@@ -67,7 +43,7 @@ function GameText() {
     } else if (answer !== textPrompt.letter) {
       setTextPrompt(textPromptArr[++i]);
     }
-    if (i > textPromptArr.length) {
+    if (i >= textPromptArr.length) {
       setGameEnd(true);
     }
     userAnswerRef.current.value = '';
@@ -77,13 +53,7 @@ function GameText() {
     checkAnswer(userAnswerRef.current.value.toUpperCase().trim());
   }
 
-  // useEffect(() => {
-  //   displayPrompt();
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
-
   useEffect(() => {
-    // notLearning();
     return () => {
       pointsMemory = {};
       i = 0;
@@ -94,9 +64,6 @@ function GameText() {
   const maxLevelPts = textPromptArr.length * 5;
   let totalPts = Object.keys(pointsMemory).length * 5;
   let margin = totalPts < 10 ? 15 : 8;
-
-  // The below in order to make the +5Thumb appear only once preventing fluctuation
-  // let thumb = pointsMemory[prompt];
 
   //preventing LevelSummary page refreshing (reloading)
 
@@ -109,7 +76,7 @@ function GameText() {
 
   return !gameEnd ? (
     <div className="centerme">
-      <div className="game-container">
+      <div className="game-container" style={{ position: 'relative', top: -100 }}>
         <div id="points-container">
           <div id="score">
             <Typography
@@ -131,8 +98,11 @@ function GameText() {
             <Grade style={{ fontSize: 100, fill: 'gold' }}></Grade>
           </div>
         </div>
-        <div className="prompt-card">
-          <div id="thumb-containter">
+        <div
+          className="prompt-card"
+          style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+        >
+          <div id="thumb-containter" style={{ position: 'absolute', zIndex: 10 }}>
             <div>
               {thumb ? (
                 <BounceUp>
@@ -154,14 +124,25 @@ function GameText() {
               )}
             </div>
           </div>
-          <div className="prompt-box">
-            <div className="prompt-content">
+          <div className="prompt-box" style={{ backgroundColor: '#e3f2fd', opacity: 0.85 }}>
+            <div
+              className="prompt-content"
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+              }}
+            >
               <>
-                {/* <Typography variant="h6">Wait for the next sign</Typography>
-                <div className="break" />
-                <Typography variant="h2">{prompt}</Typography>
-                <img id="img-learn" src={picture} alt={prompt} style={{ marginLeft: 20 }} /> */}
-                {textPrompt ? <img src={textPrompt.picture} alt={textPrompt.letter} /> : ''}
+                {textPrompt ? (
+                  <img
+                    src={textPrompt.picture}
+                    alt={textPrompt.letter}
+                    style={{ height: 150, width: 150 }}
+                  />
+                ) : (
+                  ''
+                )}
                 <TextField
                   type="text"
                   label="Your Answer"
