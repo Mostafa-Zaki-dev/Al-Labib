@@ -114,6 +114,90 @@ export function AuthProvider({ children }) {
     return currentUser.reauthenticateWithCredential(credentials);
   }
 
+  async function googleSignIn() {
+    var googleProvider = new firebase.auth.GoogleAuthProvider();
+    // auth.signInWithPopup(googleProvider).then((result) => {
+    //   console.log('Popup result uid>>>', result.user.uid);
+    // });
+    // await auth.signInWithRedirect(googleProvider);
+    // auth.getRedirectResult()
+    auth.signInWithPopup(googleProvider).then((result) => {
+      console.log('result>>>', result);
+      const { user } = result;
+      const nameArr = user.displayName.split(' ');
+      const photoURL = user.photoURL;
+      console.log('type of photoURL>>', typeof photoURL);
+      const firstName = nameArr[0];
+      const lastName = nameArr[1];
+      db.collection('Users')
+        .doc(user.uid)
+        .get()
+        .then((docRef) => {
+          if (!docRef.exists) {
+            db.collection('Users')
+              .doc(user.uid)
+              .set({
+                firstName: firstName,
+                lastName: lastName,
+                pictureURL: photoURL,
+                points: 0,
+                checkpoints: 0,
+                progress: {
+                  'Level 1': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 2': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 3': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 4': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 5': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 6': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 7': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 8': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                  'Level 9': {
+                    learn: false,
+                    practice: false,
+                    text: false,
+                  },
+                },
+              })
+              .catch((error) => {
+                console.log('Something went wrong with adding user to firestore:', error);
+              });
+          }
+        });
+    });
+  }
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setCurrentUser(user);
@@ -133,6 +217,7 @@ export function AuthProvider({ children }) {
     updateUserPassword,
     resetPassword,
     reAuthenticate,
+    googleSignIn,
   };
   return <AuthContext.Provider value={value}>{!loading && children}</AuthContext.Provider>;
 }

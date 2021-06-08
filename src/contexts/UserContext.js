@@ -72,24 +72,26 @@ export function UserProvider({ children }) {
   }
 
   async function updateDbUserCp() {
-    const user = await db.collection('Users').doc(isLoggedIn.uid).get();
-    if (user.exists) {
-      const dbUser = user.data();
-      let progress = dbUser.progress;
-      let cp = 0;
-      for (let level in progress) {
-        // the below if condition is to avoid the updateDbUserProgress Error
-        if (level !== 'undefined') {
-          for (let key in progress[level]) {
-            if (progress[level][key] === true) {
-              cp++;
+    if (isLoggedIn) {
+      const user = await db.collection('Users').doc(isLoggedIn.uid).get();
+      if (user.exists) {
+        const dbUser = user.data();
+        let progress = dbUser.progress;
+        let cp = 0;
+        for (let level in progress) {
+          // the below if condition is to avoid the updateDbUserProgress Error
+          if (level !== 'undefined') {
+            for (let key in progress[level]) {
+              if (progress[level][key] === true) {
+                cp++;
+              }
             }
           }
         }
+        db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
+      } else if (!user.exists) {
+        updateDbUserCp();
       }
-      db.collection('Users').doc(isLoggedIn.uid).update({ checkpoints: cp });
-    } else if (!user.exists) {
-      updateDbUserCp();
     }
   }
 

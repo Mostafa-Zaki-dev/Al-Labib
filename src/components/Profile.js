@@ -75,7 +75,7 @@ export default function Profile({ profileShow, setProfileShow }) {
           Hi, {dbUser && currentUser && dbUser.firstName}!
         </DialogTitle>
         <div className="center-modal">
-          <Typography variant="h2">STATS</Typography>
+          {/* <Typography variant="h2">STATS</Typography> */}
           <Typography variant="h5">Unlocked Levels</Typography>
           <Tada>
             <Typography variant="h2" color="primary">

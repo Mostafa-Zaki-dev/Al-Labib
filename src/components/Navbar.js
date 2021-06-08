@@ -59,9 +59,17 @@ export default function Navbar() {
           >
             <div className={classes.DrawerList}>
               <Box textAlign="center">
-                <Avatar className={classes.Avatar}>
-                  <AvatarIcon color="secondary" fontSize="large" />
-                </Avatar>
+                {dbUser && currentUser && dbUser.pictureURL ? (
+                  <Avatar
+                    className={classes.Avatar}
+                    alt="google account photo"
+                    src={dbUser.pictureURL}
+                  />
+                ) : (
+                  <Avatar className={classes.Avatar}>
+                    <AvatarIcon color="secondary" fontSize="large" />
+                  </Avatar>
+                )}
                 {dbUser && currentUser ? (
                   <Typography variant="h5">Hi, {dbUser.firstName}</Typography>
                 ) : (
