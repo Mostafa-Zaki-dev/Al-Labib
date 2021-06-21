@@ -8,7 +8,16 @@ export default function LandingPage() {
   const { googleSignIn } = useAuth();
   return (
     <div className="centerme">
-      <div className="logo">Al-Labib Logo</div>
+      <div className="logo">
+        <img
+          src="/appLogo.png"
+          alt="Al-Labib Logo"
+          style={{
+            height: 210,
+            width: 210,
+          }}
+        />
+      </div>
       <div className="landingbody">
         <Typography variant="h6">
           Sign Language is a dance with words, <br /> Wanna dance with your beloved ones ?
