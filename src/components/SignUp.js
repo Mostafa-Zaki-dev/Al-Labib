@@ -45,15 +45,50 @@ export default function SignUp() {
         <Typography variant="h2">SIGN UP</Typography>
         {error && <div>{error}</div>}
         <FormControl>
-          <TextField required type="text" label="First Name" inputRef={firstNameRef} />
-          <TextField required type="text" label="Last Name" inputRef={lastNameRef} />
-          <TextField required type="email" label="Email" inputRef={emailRef} />
-          <TextField required type="password" label="Password" inputRef={passwordRef} />
+          <TextField
+            required
+            type="text"
+            label="First Name"
+            inputRef={firstNameRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
+          <TextField
+            required
+            type="text"
+            label="Last Name"
+            inputRef={lastNameRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
+          <TextField
+            required
+            type="email"
+            label="Email"
+            inputRef={emailRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
+          <TextField
+            required
+            type="password"
+            label="Password"
+            inputRef={passwordRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
           <TextField
             required
             type="password"
             label="Confirm Password"
             inputRef={passwordConfirmRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
           />
           <Button type="submit" disabled={loading} onClick={handleSubmit}>
             Sign Up

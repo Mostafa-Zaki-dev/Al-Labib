@@ -33,8 +33,24 @@ export default function SignIn() {
         <Typography variant="h2">SIGN IN</Typography>
         {error && <div>{error}</div>}
         <FormControl>
-          <TextField required type="email" label="Email" inputRef={emailRef} />
-          <TextField required type="password" label="Password" inputRef={passwordRef} />
+          <TextField
+            required
+            type="email"
+            label="Email"
+            inputRef={emailRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
+          <TextField
+            required
+            type="password"
+            label="Password"
+            inputRef={passwordRef}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleSubmit(e);
+            }}
+          />
           <Button type="submit" disabled={loading} onClick={handleSubmit}>
             Sign In
           </Button>

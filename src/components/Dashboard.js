@@ -10,8 +10,6 @@ function Dashboard() {
   const { dbUser, getDbUser, getLevels, updateDbUserCp } = useUser();
   const { createGoogleDbUser } = useAuth();
 
-  console.log('<<rendered>>');
-
   useEffect(() => {
     if (!dbUser) {
       createGoogleDbUser();
