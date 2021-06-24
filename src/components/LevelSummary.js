@@ -3,6 +3,12 @@ import { Redirect, useHistory } from 'react-router-dom';
 import { Button, Typography } from '@material-ui/core';
 import GradeIcon from '@material-ui/icons/Grade';
 import { useUser } from '../contexts/UserContext';
+import { tada } from 'react-animations';
+import styled, { keyframes } from 'styled-components';
+
+const Tada = styled.div`
+  animation: 900ms ${keyframes`${tada}`};
+`;
 
 // To avoid the result of the rendering twice of the StrictMode
 let ReactStrictModeCompensateCounter = 0;
@@ -44,7 +50,7 @@ export default function LevelSummary(props) {
     let dbPoints = dbUser.points;
     let updatedPts = totalPts + dbPoints;
     await updateDbUserPts(updatedPts);
-    if (totalPts >= maxLevelPts) {
+    if (totalPts === maxLevelPts) {
       await updateDbUserProgress(currentLevel.name, difficulty);
       await updateDbUserCp();
     }
@@ -60,8 +66,37 @@ export default function LevelSummary(props) {
       <div className="game-summary-container">
         <div>
           <Typography variant="h2">Level Summary</Typography>
-          <Typography>Total Points</Typography>
-          <GradeIcon color="primary" style={{ fontSize: 100 }}></GradeIcon>
+          <Typography variant="h4">Game Score</Typography>
+          <Tada>
+            <div
+              style={{
+                position: 'relative',
+                display: 'flex',
+                textAlign: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <Typography
+                variant="h2"
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 35,
+                  textAlign: 'center',
+                  color: 'white',
+                  position: 'absolute',
+                  top: '32%',
+                  marginRight: 1,
+                }}
+              >
+                {totalPts}
+              </Typography>
+              <GradeIcon color="primary" style={{ fontSize: 110, fill: 'gold' }}></GradeIcon>
+            </div>
+          </Tada>
+          <Typography variant="h5">Total Points</Typography>
+          <Typography variant="h2" color="primary">
+            {dbUser.points}
+          </Typography>
           <br />
           {/* <Button onClick={() => history.push('/')}>Next</Button> */}
           <Button variant="outlined" onClick={() => history.push('/app')}>
