@@ -28,7 +28,16 @@ export default function SignIn() {
 
   return (
     <div className="centerme">
-      <div className="logo">Al-Labib Logo</div>
+      <div className="logo">
+        <img
+          src="/appLogo.png"
+          alt="Al-Labib Logo"
+          style={{
+            height: 150,
+            width: 150,
+          }}
+        />
+      </div>
       <div className="formdiv">
         <Typography variant="h2">SIGN IN</Typography>
         {error && <div>{error}</div>}
@@ -60,8 +69,14 @@ export default function SignIn() {
         </FormControl>
         <br />
         <br />
-        <div>
-          Need an account? <Link to="/signup">Sign Up</Link>
+        <Link to="/resetpassword" style={{ textDecoration: 'none' }}>
+          Forgot Password?
+        </Link>
+        <div style={{ marginTop: 5 }}>
+          Need an account? {'  '}
+          <Link to="/signup" style={{ textDecoration: 'none' }}>
+            Sign Up
+          </Link>
         </div>
       </div>
     </div>

@@ -13,15 +13,21 @@ export default function LandingPage() {
           src="/appLogo.png"
           alt="Al-Labib Logo"
           style={{
-            height: 210,
-            width: 210,
+            height: 190,
+            width: 190,
           }}
         />
       </div>
       <div className="landingbody">
-        <Typography variant="h6">
-          Sign Language is a dance with words, <br /> Wanna dance with your beloved ones ?
+        <Typography variant="h6">Sign Language is a dance with words,</Typography>
+        <Typography variant="h6" style={{ fontSize: 15 }}>
+          Wanna dance with your beloved ones &#128521;?
         </Typography>
+        <GoogleButton
+          style={{ margin: 'auto', marginTop: 25, borderRadius: 3 }}
+          onClick={googleSignIn}
+        />
+        <br />
         <Button variant="contained" color="primary" onClick={() => history.push('/signin')}>
           Sign In
         </Button>
@@ -29,10 +35,6 @@ export default function LandingPage() {
         <Button variant="outlined" onClick={() => history.push('/signup')}>
           Create Account
         </Button>
-        <GoogleButton
-          style={{ margin: 'auto', marginTop: 25, borderRadius: 3 }}
-          onClick={googleSignIn}
-        />
       </div>
     </div>
   );

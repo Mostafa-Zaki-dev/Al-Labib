@@ -14,6 +14,7 @@ import UpdateProfile from './UpdateProfile';
 import GameText from './GameText';
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase-config';
+import ResetPassword from './ResetPassword';
 
 const useStyles = makeStyles((theme) => ({
   offset: theme.mixins.toolbar,
@@ -49,6 +50,7 @@ export default function Routes() {
               <Route path="/app" component={TrailApp} />
               <Route path="/levelsummary" component={LevelSummary} />
               <Route path="/updateprofile" component={UpdateProfile} />
+              <Route path="/resetpassword" component={ResetPassword} />
             </Switch>
           </UserProvider>
         </AuthProvider>

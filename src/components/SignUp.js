@@ -40,7 +40,6 @@ export default function SignUp() {
 
   return (
     <div className="centerme">
-      <div className="logo">Al-Labib Logo</div>
       <div className="formdiv">
         <Typography variant="h2">SIGN UP</Typography>
         {error && <div>{error}</div>}
@@ -100,7 +99,10 @@ export default function SignUp() {
         <br />
         <br />
         <div>
-          Already have an account? <Link to="/signin">Sign in</Link>
+          Already have an account?{' '}
+          <Link to="/signin" style={{ textDecoration: 'none' }}>
+            Sign in
+          </Link>
         </div>
       </div>
     </div>

@@ -112,13 +112,13 @@ export default function Navbar() {
                   </ListItemIcon>
                   <ListItemText primary="About Us" />
                 </ListItem>
-                <br />
+                {/* <br />
                 <ListItem button onClick={() => {}}>
                   <ListItemIcon>
                     <SettingsIcon />
                   </ListItemIcon>
                   <ListItemText primary="Settings" />
-                </ListItem>
+                </ListItem> */}
               </List>
               <br />
               <br />
