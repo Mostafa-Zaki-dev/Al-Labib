@@ -119,7 +119,6 @@ export default function UpdateProfile() {
                   inputRef={passwordConfirmRef}
                   placeholder="********"
                 />
-                <Link href="/resetpassword">Reset Password</Link>
                 <Button type="submit" disabled={loading} onClick={handleSubmit}>
                   Update Profile
                 </Button>
@@ -145,12 +144,18 @@ export default function UpdateProfile() {
             label="Password"
             inputRef={reAuthPasswordRef}
             placeholder="********"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleNext(e);
+            }}
           />
           <TextField
             type="Password"
             label="Confirm Password"
             inputRef={reAuthPasswordConfirmRef}
             placeholder="********"
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') handleNext(e);
+            }}
           />
           <Button type="submit" disabled={loading} onClick={handleNext}>
             Next

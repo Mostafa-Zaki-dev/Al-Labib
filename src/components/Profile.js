@@ -76,21 +76,28 @@ export default function Profile({ profileShow, setProfileShow }) {
         </DialogTitle>
         <div className="center-modal">
           {/* <Typography variant="h2">STATS</Typography> */}
-          <Typography variant="h5">Unlocked Levels</Typography>
+          <Typography variant="h5" color="secondary">
+            {' '}
+            Levels Unlocked
+          </Typography>
           <Tada>
             <Typography variant="h2" color="primary">
               {`${unlockedLevels} / 9`}
             </Typography>
           </Tada>
           <br />
-          <Typography variant="h5">Achieved Stars</Typography>
+          <Typography variant="h5" color="secondary">
+            Achieved Stars
+          </Typography>
           <Tada>
             <Typography variant="h2" color="primary">
               {`${cp} / 27`}
             </Typography>
           </Tada>
           <br />
-          <Typography variant="h5">Total Points</Typography>
+          <Typography variant="h5" color="secondary">
+            Total Points
+          </Typography>
           <Tada>
             <Typography variant="h2" color="primary">
               {points}
@@ -98,21 +105,23 @@ export default function Profile({ profileShow, setProfileShow }) {
           </Tada>
         </div>
         <List>
-          <ListItem
-            align="center"
-            button
-            onClick={() => {
-              setProfileShow(false);
-              history.push('/updateprofile');
-            }}
-          >
-            <ListItemAvatar style={{ marginLeft: 50 }}>
-              <Avatar>
-                <PersonOutlineIcon color="secondary" />
-              </Avatar>
-            </ListItemAvatar>
-            <ListItemText primary="Edit Account" />
-          </ListItem>
+          {dbUser && currentUser && !dbUser.pictureURL && (
+            <ListItem
+              align="center"
+              button
+              onClick={() => {
+                setProfileShow(false);
+                history.push('/updateprofile');
+              }}
+            >
+              <ListItemAvatar style={{ marginLeft: 50 }}>
+                <Avatar>
+                  <PersonOutlineIcon color="secondary" />
+                </Avatar>
+              </ListItemAvatar>
+              <ListItemText primary="Edit Account" />
+            </ListItem>
+          )}
         </List>
       </Dialog>
     </>

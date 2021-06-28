@@ -56,7 +56,7 @@ export default function ResetPassword() {
             <Button type="submit" disabled={loading} onClick={handleSubmit}>
               Send Email
             </Button>
-            <Button variant="outlined" onClick={() => history.push('/signin')}>
+            <Button variant="outlined" onClick={() => history.go(-1)}>
               Back
             </Button>
           </FormControl>

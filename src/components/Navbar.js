@@ -19,13 +19,14 @@ import AvatarIcon from '@material-ui/icons/AccountCircle';
 import DashboardIcon from '@material-ui/icons/Dashboard';
 import PersonIcon from '@material-ui/icons/Person';
 import InfoIcon from '@material-ui/icons/Info';
-import SettingsIcon from '@material-ui/icons/Settings';
+import HelpIcon from '@material-ui/icons/Help';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import MenuIcon from '@material-ui/icons/Menu';
 import theme from '../contexts/Theme';
 import { useAuth } from '../contexts/AuthContext';
 import { useUser } from '../contexts/UserContext';
 import Profile from './Profile';
+import Guide from './Guide';
 
 const useStyles = makeStyles({
   DrawerList: {
@@ -43,6 +44,7 @@ export default function Navbar() {
   const { dbUser } = useUser();
   const history = useHistory();
   const [profileShow, setProfileShow] = useState(false);
+  const [guideShow, setGuideShow] = useState(false);
 
   return (
     <React.Fragment>
@@ -67,11 +69,13 @@ export default function Navbar() {
                   />
                 ) : (
                   <Avatar className={classes.Avatar}>
-                    <AvatarIcon color="secondary" fontSize="large" />
+                    <AvatarIcon color="primary" fontSize="large" />
                   </Avatar>
                 )}
                 {dbUser && currentUser ? (
-                  <Typography variant="h5">Hi, {dbUser.firstName}</Typography>
+                  <Typography variant="h5" color="primary">
+                    Hi, {dbUser.firstName}
+                  </Typography>
                 ) : (
                   ''
                 )}
@@ -87,7 +91,7 @@ export default function Navbar() {
                     }}
                   >
                     <ListItemIcon>
-                      <DashboardIcon />
+                      <DashboardIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Dashboard" />
                   </ListItem>
@@ -101,11 +105,23 @@ export default function Navbar() {
                     }}
                   >
                     <ListItemIcon>
-                      <PersonIcon />
+                      <PersonIcon color="primary" />
                     </ListItemIcon>
                     <ListItemText primary="Profile" />
                   </ListItem>
                 )}
+                <ListItem
+                  button
+                  onClick={() => {
+                    setGuideShow(!guideShow);
+                    setOpen(false);
+                  }}
+                >
+                  <ListItemIcon>
+                    <HelpIcon color="primary" />
+                  </ListItemIcon>
+                  <ListItemText primary="Guide" />
+                </ListItem>
                 <ListItem
                   button
                   onClick={() => {
@@ -114,17 +130,10 @@ export default function Navbar() {
                   }}
                 >
                   <ListItemIcon>
-                    <InfoIcon />
+                    <InfoIcon color="primary" />
                   </ListItemIcon>
                   <ListItemText primary="About Us" />
                 </ListItem>
-                {/* <br />
-                <ListItem button onClick={() => {}}>
-                  <ListItemIcon>
-                    <SettingsIcon />
-                  </ListItemIcon>
-                  <ListItemText primary="Settings" />
-                </ListItem> */}
               </List>
               <br />
               <br />
@@ -150,6 +159,7 @@ export default function Navbar() {
         </Toolbar>
       </AppBar>
       <Profile profileShow={profileShow} setProfileShow={setProfileShow} />
+      <Guide guideShow={guideShow} setGuideShow={setGuideShow} />
     </React.Fragment>
   );
 }
