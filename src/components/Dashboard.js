@@ -23,8 +23,11 @@ function Dashboard() {
   }, []);
 
   return (
-    <Container className="centerme" style={{ marginTop: 20 }}>
-      <Typography variant="h3"> Get to Learn</Typography>
+    <Container className="centerme" style={{ marginTop: 10 }}>
+      <Typography variant="h3" color={'primary'} style={{ marginBottom: 25 }}>
+        {' '}
+        Get to Learn
+      </Typography>
       <Grid container spacing={3}>
         {levels.map((level) => (
           <Level key={level} dbUser={dbUser} name={`Level ${level}`} levelNum={level}></Level>

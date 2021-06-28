@@ -44,7 +44,10 @@ export default function ResetPassword() {
         <br />
         <br />
         <div className="formdiv">
-          <Typography variant="h5">RESET PASSWORD</Typography>
+          <Typography variant="h5" color={'primary'} style={{ fontWeight: 'bold' }}>
+            RESET PASSWORD
+          </Typography>
+          <br />
           {error && <Alert severity="error">{error}</Alert>}
           {message && <Alert severity="success">{message}</Alert>}
           <FormControl>

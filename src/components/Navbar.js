@@ -106,7 +106,13 @@ export default function Navbar() {
                     <ListItemText primary="Profile" />
                   </ListItem>
                 )}
-                <ListItem button onClick={() => {}}>
+                <ListItem
+                  button
+                  onClick={() => {
+                    history.push('/about-us');
+                    setOpen(false);
+                  }}
+                >
                   <ListItemIcon>
                     <InfoIcon />
                   </ListItemIcon>

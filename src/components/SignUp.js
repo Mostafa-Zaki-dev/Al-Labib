@@ -41,7 +41,9 @@ export default function SignUp() {
   return (
     <div className="centerme">
       <div className="formdiv">
-        <Typography variant="h2">SIGN UP</Typography>
+        <Typography variant="h3" style={{ fontWeight: 'bold' }} color={'primary'}>
+          SIGN UP
+        </Typography>
         {error && <div>{error}</div>}
         <FormControl>
           <TextField

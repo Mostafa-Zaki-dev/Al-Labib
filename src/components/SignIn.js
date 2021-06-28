@@ -39,7 +39,9 @@ export default function SignIn() {
         />
       </div>
       <div className="formdiv">
-        <Typography variant="h2">SIGN IN</Typography>
+        <Typography variant="h3" style={{ fontWeight: 'bold' }} color={'primary'}>
+          SIGN IN
+        </Typography>
         {error && <div>{error}</div>}
         <FormControl>
           <TextField
