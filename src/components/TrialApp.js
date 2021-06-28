@@ -4,7 +4,7 @@ import * as handpose from '@tensorflow-models/handpose';
 import * as fp from 'fingerpose';
 import Webcam from 'react-webcam';
 import handSigns from '../handsigns';
-import { Typography } from '@material-ui/core';
+import { Typography, CircularProgress } from '@material-ui/core';
 import { ThumbUp, Grade } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
 import { Redirect } from 'react-router-dom';
@@ -35,6 +35,7 @@ function TrailApp() {
   const [picture, setPicture] = useState('');
   const [gameEnd, setGameEnd] = useState(false);
   const [wave, setWave] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   // console.log('App rendered');
   // console.log('prompt: >>', prompt);
@@ -43,9 +44,10 @@ function TrailApp() {
     if (difficulty === 'practice') {
       setPromptArr(shuffle(promptArr));
     }
-    if (difficulty === 'text') {
-      setPromptArr(shuffle(promptArr));
-    }
+    // No need for the below "if" since we seperated GameText in different component
+    // if (difficulty === 'text') {
+    //   setPromptArr(shuffle(promptArr));
+    // }
   };
 
   const runHandpose = async () => {
@@ -95,7 +97,7 @@ function TrailApp() {
         const GE = new fp.GestureEstimator(
           currentLevel.detect.map((handSign) => handSigns[handSign])
         );
-        const gesture = await GE.estimate(hand[0].landmarks, 7.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        const gesture = await GE.estimate(hand[0].landmarks, 7.5); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           const confidenceArr = gesture.gestures.map((prediction) => prediction.confidence);
@@ -122,7 +124,7 @@ function TrailApp() {
         clearInterval(interval);
         setGameEnd(true);
       }
-    }, 5000);
+    }, 7000);
   };
 
   useEffect(() => {
@@ -133,6 +135,9 @@ function TrailApp() {
   useEffect(() => {
     runHandpose();
     notLearning();
+    setTimeout(() => {
+      setLoading(false);
+    }, 6000);
     return () => {
       pointsMemory = {};
       setWave(false);
@@ -165,94 +170,104 @@ function TrailApp() {
       <header>
         <Webcam className="video" ref={webcamRef} />
       </header>
-      <div className="game-container">
-        <div id="points-container">
-          <div id="score">
-            <Typography
-              variant="h2"
-              style={{
-                fontWeight: 'bold',
-                color: 'white',
-                fontSize: 30,
-                textAlign: 'justify',
-                zIndex: 10,
-                marginLeft: margin,
-                marginTop: 10,
-              }}
-            >
-              {totalPts}
-            </Typography>
-          </div>
-          <div id="score-star">
-            <Grade style={{ fontSize: 100, fill: 'gold' }}></Grade>
-          </div>
+      {loading ? (
+        <div className="loading">
+          <CircularProgress size={60} />
+          <Typography variant="h4">Loading...</Typography>
         </div>
-        <div className="prompt-card">
-          <div id="thumb-containter">
-            <div>
-              {thumb ? (
-                <BounceUp>
-                  <Typography variant="h1" style={{ color: 'gold' }}>
-                    +5
-                  </Typography>
-                </BounceUp>
-              ) : (
-                ''
-              )}
-            </div>
-            <div>
-              {thumb ? (
-                <BounceUp>
-                  <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
-                </BounceUp>
-              ) : (
-                ''
-              )}
-            </div>
-          </div>
-          <div className="prompt-box">
-            {difficulty !== 'learn' ? (
-              <div className="prompt-content">
-                <Typography variant="h6" color="secondary">
-                  Detected: {letter}
-                </Typography>
-                <Typography variant="h4" color="primary">
-                  Hand sign for: {prompt}
-                </Typography>
-              </div>
-            ) : (
-              <div
-                className="prompt-content"
+      ) : (
+        <div className="game-container">
+          <div id="points-container">
+            <div id="score">
+              <Typography
+                variant="h2"
                 style={{
-                  display: 'flex',
-                  flexDirection: 'row',
-                  justifyContent: 'center',
-                  alignContent: 'center',
-                  alignItems: 'center',
-                  flexWrap: 'wrap',
+                  fontWeight: 'bold',
+                  color: 'white',
+                  fontSize: 30,
+                  textAlign: 'justify',
+                  zIndex: 10,
+                  marginLeft: margin,
+                  marginTop: 10,
                 }}
               >
-                {!wave ? (
-                  <>
-                    <Typography variant="h5" style={{ fontWeight: 'bold', justifyItems: 'center' }}>
-                      Match the signs and learn
+                {totalPts}
+              </Typography>
+            </div>
+            <div id="score-star">
+              <Grade style={{ fontSize: 100, fill: 'gold' }}></Grade>
+            </div>
+          </div>
+          <div className="prompt-card">
+            <div id="thumb-containter">
+              <div>
+                {thumb ? (
+                  <BounceUp>
+                    <Typography variant="h1" style={{ color: 'gold' }}>
+                      +5
                     </Typography>
-                    <div className="break" />
-                    <Typography variant="h6">-Wave your hand to start-</Typography>
-                  </>
+                  </BounceUp>
                 ) : (
-                  <>
-                    <Typography variant="h6">Wait for the next sign</Typography>
-                    <div className="break" />
-                    <Typography variant="h2">{prompt}</Typography>
-                    <img id="img-learn" src={picture} alt={prompt} style={{ marginLeft: 20 }} />
-                  </>
+                  ''
                 )}
               </div>
-            )}
+              <div>
+                {thumb ? (
+                  <BounceUp>
+                    <ThumbUp style={{ fontSize: 100, float: 'center', color: 'gold' }} />
+                  </BounceUp>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
+            <div className="prompt-box">
+              {difficulty !== 'learn' ? (
+                <div className="prompt-content">
+                  <Typography variant="h6" color="secondary">
+                    Detected: {letter}
+                  </Typography>
+                  <Typography variant="h4" color="primary">
+                    Hand sign for: {prompt}
+                  </Typography>
+                </div>
+              ) : (
+                <div
+                  className="prompt-content"
+                  style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    alignContent: 'center',
+                    alignItems: 'center',
+                    flexWrap: 'wrap',
+                  }}
+                >
+                  {!wave ? (
+                    <>
+                      <Typography
+                        variant="h5"
+                        style={{ fontWeight: 'bold', justifyItems: 'center' }}
+                      >
+                        Match the signs and learn
+                      </Typography>
+                      <div className="break" />
+                      <Typography variant="h6">-Wave your hand to start-</Typography>
+                    </>
+                  ) : (
+                    <>
+                      <Typography variant="h6">Wait for the next sign</Typography>
+                      <div className="break" />
+                      <Typography variant="h2">{prompt}</Typography>
+                      <img id="img-learn" src={picture} alt={prompt} style={{ marginLeft: 20 }} />
+                    </>
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   ) : (
     <Redirect to={{ pathname: '/levelsummary', state: { totalPts, maxLevelPts } }} />
