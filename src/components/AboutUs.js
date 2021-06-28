@@ -27,7 +27,8 @@ function AboutUs() {
               style={{ paddingLeft: '10%', paddingRight: '10%', fontSize: 16 }}
             >
               Al-Labib App goal is to break through the communication barriers between hearing and
-              non-hearing people. Making the sign language a fun and easy game to learn and play.
+              non-hearing people.Learning sign language is now a fun and easy game to learn and
+              play.
             </Typography>
             <br />
             <Typography
