@@ -2,6 +2,18 @@ import { useUser } from '../contexts/UserContext';
 import { useHistory } from 'react-router-dom';
 import { Dialog, List, Button, Typography, Grow } from '@material-ui/core';
 
+const letters = {
+  'Level 1': 'أ ب ت ث',
+  'Level 2': 'ج ح خ',
+  'Level 3': 'د ذ',
+  'Level 4': 'ر ز',
+  'Level 5': 'س ش ص ض',
+  'Level 6': 'ط ظ',
+  'Level 7': 'ع غ',
+  'Level 8': 'ف ق ك ل',
+  'Level 9': 'م ن ه و ي',
+};
+
 export default function LevelDescription({ name, show }) {
   const { dbUser, levels, setCurrentLevel, defineDifficulty, setDifficulty } = useUser();
   const history = useHistory();
@@ -49,6 +61,14 @@ export default function LevelDescription({ name, show }) {
       <Typography variant="h3" style={{ fontWeight: 'bold' }} color="primary" align="center">
         {name}
       </Typography>
+      <Typography
+        variant="h4"
+        style={{ fontWeight: 'bold', fontSize: 20 }}
+        color="secondary"
+        align="center"
+      >
+        {letters[name]}
+      </Typography>
       <List align="center">
         <Typography variant="h4" style={{ color: 'gold', fontWeight: 'bold' }}>
           Stars
@@ -70,6 +90,14 @@ export default function LevelDescription({ name, show }) {
     <Dialog open={show} TransitionComponent={Grow} transitionDuration={{ enter: 600, exit: 200 }}>
       <Typography variant="h3" style={{ fontWeight: 'bold' }} color="primary" align="center">
         {name}
+      </Typography>
+      <Typography
+        variant="h4"
+        style={{ fontWeight: 'bold', fontSize: 20 }}
+        color="secondary"
+        align="center"
+      >
+        {letters[name]}
       </Typography>
       <List align="center">
         <Typography variant="h4" style={{ color: 'gold', fontWeight: 'bold' }}>
