@@ -61,45 +61,47 @@ function App() {
       // setting up Gesture Estimator
 
       if (hand.length > 0) {
-        //destructuring signs
-        // const {
-        //   alefSign,
-        //   behSign,
-        //   tehSign,
-        //   thehSign,
-        //   jeemSign,
-        //   haaSign,
-        //   khaaSign,
-        //   dalSign,
-        //   zalSign,
-        //   raaSign,
-        //   zeenSign,
-        //   seenSign,
-        //   sheenSign,
-        // } = handSigns;
+        // destructuring signs
+        const {
+          // alefSign,
+          // behSign,
+          // tehSign,
+          // thehSign,
+          // jeemSign,
+          // haaSign,
+          // khaaSign,
+          // dalSign,
+          // zalSign,
+          // raaSign,
+          // zeenSign,
+          // seenSign,
+          // sheenSign,
+          wowSign,
+        } = handSigns;
 
-        // const GE = new fp.GestureEstimator([
-        //   alefSign,
-        //   behSign,
-        //   tehSign,
-        //   thehSign,
-        //   jeemSign,
-        //   haaSign,
-        //   khaaSign,
-        //   dalSign,
-        //   zalSign,
-        //   raaSign,
-        //   zeenSign,
-        //   seenSign,
-        //   sheenSign,
-        // ]);
+        const GE = new fp.GestureEstimator([
+          // alefSign,
+          // behSign,
+          // tehSign,
+          // thehSign,
+          // jeemSign,
+          // haaSign,
+          // khaaSign,
+          // dalSign,
+          // zalSign,
+          // raaSign,
+          // zeenSign,
+          // seenSign,
+          // sheenSign,
+          wowSign,
+        ]);
 
         // Applying DRY and KISS principles
-        const GE = new fp.GestureEstimator(
-          Object.keys(handSigns).map((handSign) => handSigns[handSign])
-        );
-        const gesture = await GE.estimate(hand[0].landmarks, 8.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
-        // console.log('gesture >>>', gesture);
+        // const GE = new fp.GestureEstimator(
+        //   Object.keys(handSigns).map((handSign) => handSigns[handSign])
+        // );
+        const gesture = await GE.estimate(hand[0].landmarks, 7.0); //GE.estimate(landmarks Array, detection level of confidence -from 1 to 10-)
+        console.log('gesture >>>', gesture);
 
         if (gesture.gestures !== undefined && gesture.gestures.length > 0) {
           // console.log('gesture.gestures >>>>', gesture.gestures);

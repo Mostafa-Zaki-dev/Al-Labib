@@ -2,9 +2,9 @@ import Alef_Letter from './Alef.png';
 import Beh_Letter from './Beh.png';
 import Teh_Letter from './Teh.png';
 import Theh_Letter from './Theh.png';
-import Jeem_Letter from './Jeem.png';
-import Haa_Letter from './Haa.png';
-import Khaa_Letter from './Khaa.png';
+import ج from './Jeem.png';
+import ح from './Haa.png';
+import خ from './Khaa.png';
 import Dal_Letter from './Dal.png';
 import Zal_Letter from './Zal.png';
 import Raa_Letter from './Raa.png';
@@ -24,7 +24,7 @@ import Laam_Letter from './Laam.png';
 import Meem_Letter from './Meem.png';
 import Noon_Letter from './Noon.png';
 import Heh_Letter from './Heh.png';
-import Wow_Letter from './Wow.png';
+import و from './Wow.png';
 import Yeh_Letter from './Yeh.png';
 
 const lettersPNG = {
@@ -32,9 +32,9 @@ const lettersPNG = {
   Beh_Letter,
   Teh_Letter,
   Theh_Letter,
-  Jeem_Letter,
-  Haa_Letter,
-  Khaa_Letter,
+  ج,
+  ح,
+  خ,
   Dal_Letter,
   Zal_Letter,
   Raa_Letter,
@@ -54,7 +54,7 @@ const lettersPNG = {
   Meem_Letter,
   Noon_Letter,
   Heh_Letter,
-  Wow_Letter,
+  و,
   Yeh_Letter,
 };
 
