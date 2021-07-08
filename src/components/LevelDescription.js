@@ -110,7 +110,7 @@ export default function LevelDescription({ name, show }) {
           style={{ color: 'gold', fontWeight: 'bolder' }}
         >{` ${levelsCompleted} / 3`}</Typography>
         <br />
-        <Typography variant="h5" color="primary">
+        <Typography variant="h5" color="primary" style={{ fontWeight: 'bold' }}>
           LEVEL COMPLETED
         </Typography>
         <br />

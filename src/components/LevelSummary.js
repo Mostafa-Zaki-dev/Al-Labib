@@ -23,6 +23,9 @@ export default function LevelSummary(props) {
     currentLevel,
     difficulty,
     updateDbUserCp,
+    setCurrentLevel,
+    defineDifficulty,
+    levels,
   } = useUser();
 
   useEffect(() => {
@@ -61,45 +64,109 @@ export default function LevelSummary(props) {
     dbUser && gameResults();
   }
 
+  function handleReplay() {
+    if (difficulty === 'text') {
+      history.push('/gameText');
+    } else {
+      history.push('/app');
+    }
+  }
+
+  async function handlePlayNext() {
+    await setCurrentLevel(levels[currentLevel.name]);
+    await defineDifficulty(currentLevel.name);
+
+    if (
+      dbUser.progress[currentLevel.name].learn &&
+      dbUser.progress[currentLevel.name].practice &&
+      !dbUser.progress[currentLevel.name].text
+    ) {
+      history.push({
+        pathname: '/gameText',
+      });
+    } else {
+      history.push('/app');
+    }
+  }
+
+  const levelComplete =
+    dbUser.progress[currentLevel.name].learn &&
+    dbUser.progress[currentLevel.name].practice &&
+    dbUser.progress[currentLevel.name].text;
+
   return (
     <div className="centerme">
       <div className="game-summary-container">
         <div>
-          <Typography variant="h2">Level Summary</Typography>
-          <Typography variant="h4">Game Score</Typography>
           <Tada>
-            <div
-              style={{
-                position: 'relative',
-                display: 'flex',
-                textAlign: 'center',
-                justifyContent: 'center',
-              }}
-            >
+            {totalPts === 0 && (
+              <Typography
+                variant="h4"
+                color="secondary"
+                style={{ marginBottom: 5, fontWeight: 'bold' }}
+              >
+                Ghost hand ?!!
+              </Typography>
+            )}
+            {totalPts < maxLevelPts && (
               <Typography
                 variant="h2"
+                color="secondary"
+                style={{ marginBottom: 15, fontWeight: 'bold' }}
+              >
+                Try Again!
+              </Typography>
+            )}
+            {totalPts === maxLevelPts && (
+              <Typography
+                variant="h2"
+                style={{ color: 'gold', marginBottom: 15, fontWeight: 'bold', fontSize: 55 }}
+              >
+                Star Gained
+              </Typography>
+            )}
+          </Tada>
+          <Typography variant="h4">Game Score</Typography>
+          <Typography variant="h4" color="primary">
+            {totalPts} / {maxLevelPts}
+          </Typography>
+          {totalPts === maxLevelPts && (
+            <Tada>
+              <div
                 style={{
-                  fontWeight: 'bold',
-                  fontSize: 35,
+                  position: 'relative',
+                  display: 'flex',
                   textAlign: 'center',
-                  color: 'white',
-                  position: 'absolute',
-                  top: '32%',
-                  marginRight: 1,
+                  justifyContent: 'center',
                 }}
               >
-                {totalPts}
-              </Typography>
-              <GradeIcon color="primary" style={{ fontSize: 110, fill: 'gold' }}></GradeIcon>
-            </div>
-          </Tada>
+                <Typography
+                  variant="h2"
+                  style={{
+                    fontWeight: 'bold',
+                    fontSize: 35,
+                    textAlign: 'center',
+                    color: 'white',
+                    position: 'absolute',
+                    top: '32%',
+                    marginRight: 1,
+                  }}
+                >
+                  {totalPts}
+                </Typography>
+                <GradeIcon color="primary" style={{ fontSize: 110, fill: 'gold' }}></GradeIcon>
+              </div>
+            </Tada>
+          )}
           <Typography variant="h5">Total Points</Typography>
           <Typography variant="h2" color="primary">
             {dbUser.points}
           </Typography>
           <br />
-          {/* <Button onClick={() => history.push('/')}>Next</Button> */}
-          <Button variant="outlined" onClick={() => history.push('/app')}>
+          {totalPts === maxLevelPts && !levelComplete && (
+            <Button onClick={handlePlayNext}>Next</Button>
+          )}
+          <Button variant="outlined" onClick={handleReplay}>
             Play Again
           </Button>
           <Button variant="outlined" onClick={() => history.push('/dashboard')}>

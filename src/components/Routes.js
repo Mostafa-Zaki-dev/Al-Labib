@@ -8,7 +8,7 @@ import theme from '../contexts/Theme';
 import { makeStyles, ThemeProvider } from '@material-ui/core';
 import Navbar from './Navbar';
 import Dashboard from './Dashboard';
-import TrailApp from './TrialApp';
+import TrialApp from './TrialApp';
 import LevelSummary from './LevelSummary';
 import UpdateProfile from './UpdateProfile';
 import GameText from './GameText';
@@ -44,13 +44,17 @@ export default function Routes() {
               <Route exact path="/">
                 {isLoggedIn ? <Redirect to="/dashboard" /> : <LandingPage />}
               </Route>
-              <Route path="/signup" component={SignUp} />
-              <Route path="/signin" component={SignIn} />
+              <Route path="/signup">{isLoggedIn ? <Redirect to="/dashboard" /> : <SignUp />}</Route>
+              <Route path="/signin">{isLoggedIn ? <Redirect to="/dashboard" /> : <SignIn />}</Route>
               <Route path="/dashboard">{isLoggedIn ? <Dashboard /> : <Redirect to="/" />}</Route>
-              <Route path="/gameText" component={GameText} />
-              <Route path="/app" component={TrailApp} />
+              <Route path="/gameText">
+                {isLoggedIn ? <GameText /> : <Redirect to="/dashboard" />}
+              </Route>
+              <Route path="/app">{isLoggedIn ? <TrialApp /> : <Redirect to="/dashboard" />}</Route>
               <Route path="/levelsummary" component={LevelSummary} />
-              <Route path="/updateprofile" component={UpdateProfile} />
+              <Route path="/updateprofile">
+                {isLoggedIn ? <UpdateProfile /> : <Redirect to="/dashboard" />}
+              </Route>
               <Route path="/resetpassword" component={ResetPassword} />
               <Route path="/about-us" component={AboutUs} />
             </Switch>

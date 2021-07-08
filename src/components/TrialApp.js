@@ -8,11 +8,15 @@ import { Typography, CircularProgress } from '@material-ui/core';
 import { ThumbUp, Grade } from '@material-ui/icons';
 import { useUser } from '../contexts/UserContext';
 import { Redirect } from 'react-router-dom';
-import { bounceInUp } from 'react-animations';
+import { bounceInUp, wobble } from 'react-animations';
 import styled, { keyframes } from 'styled-components';
 
 const BounceUp = styled.div`
   animation: 1s ${keyframes`${bounceInUp}`};
+`;
+
+const Wobble = styled.div`
+  animation: 12s ${keyframes`${wobble}`} infinite;
 `;
 
 let pointsMemory = {};
@@ -173,7 +177,11 @@ function TrailApp() {
       {loading ? (
         <div className="loading">
           <CircularProgress size={60} />
-          <Typography variant="h4">Loading...</Typography>
+          <Wobble>
+            <Typography variant="h4" color="primary">
+              Loading..
+            </Typography>
+          </Wobble>
         </div>
       ) : (
         <div className="game-container">
@@ -224,11 +232,11 @@ function TrailApp() {
             <div className="prompt-box">
               {difficulty !== 'learn' ? (
                 <div className="prompt-content">
+                  <Typography variant="h4" color="primary" style={{ fontWeight: 'bold' }}>
+                    Hand sign for: {prompt}
+                  </Typography>
                   <Typography variant="h6" color="secondary">
                     Detected: {letter}
-                  </Typography>
-                  <Typography variant="h4" color="primary">
-                    Hand sign for: {prompt}
                   </Typography>
                 </div>
               ) : (
