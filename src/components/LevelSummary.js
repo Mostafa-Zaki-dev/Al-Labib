@@ -12,6 +12,7 @@ const Tada = styled.div`
 
 // To avoid the result of the rendering twice of the StrictMode
 let ReactStrictModeCompensateCounter = 0;
+let updatedTotalPts = 0;
 
 export default function LevelSummary(props) {
   const history = useHistory();
@@ -52,6 +53,7 @@ export default function LevelSummary(props) {
     ReactStrictModeCompensateCounter++;
     let dbPoints = dbUser.points;
     let updatedPts = totalPts + dbPoints;
+    updatedTotalPts = updatedPts;
     await updateDbUserPts(updatedPts);
     if (totalPts === maxLevelPts) {
       await updateDbUserProgress(currentLevel.name, difficulty);
@@ -160,7 +162,10 @@ export default function LevelSummary(props) {
           )}
           <Typography variant="h5">Total Points</Typography>
           <Typography variant="h2" color="primary">
-            {dbUser.points}
+            {/* Changed the below for the sake if the asynchronous delay of showing the updated points in the deployed version
+            -although it is working on the localserver normally before updating-
+            */}
+            {updatedTotalPts}
           </Typography>
           <br />
           {totalPts === maxLevelPts && !levelComplete && (
