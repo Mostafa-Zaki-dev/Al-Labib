@@ -33,7 +33,8 @@ function TrailApp() {
   const webcamRef = useRef(null);
   const [letter, setLetter] = useState(null);
   const { currentLevel, difficulty } = useUser();
-  const [promptArr, setPromptArr] = useState(currentLevel.promptArr);
+  // make a copy of currentLevel.promptArr array to avoid mutating the original array in "levels" array at UserContext levels state
+  const [promptArr, setPromptArr] = useState([...currentLevel.promptArr]);
   const [pictureArr, setPictureArr] = useState(currentLevel.pictureArr);
   const [prompt, setPrompt] = useState(null);
   const [picture, setPicture] = useState('');

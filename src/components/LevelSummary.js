@@ -24,9 +24,7 @@ export default function LevelSummary(props) {
     currentLevel,
     difficulty,
     updateDbUserCp,
-    setCurrentLevel,
     defineDifficulty,
-    levels,
   } = useUser();
 
   useEffect(() => {
@@ -62,7 +60,7 @@ export default function LevelSummary(props) {
   };
 
   // To avoid updating points twice which cause multiplying user points by 2 each round
-  if (ReactStrictModeCompensateCounter < 2) {
+  if (ReactStrictModeCompensateCounter < 1) {
     dbUser && gameResults();
   }
 
@@ -75,7 +73,6 @@ export default function LevelSummary(props) {
   }
 
   async function handlePlayNext() {
-    await setCurrentLevel(levels[currentLevel.name]);
     await defineDifficulty(currentLevel.name);
 
     if (
